@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {};
 
@@ -24,24 +24,32 @@ const playlists = [
 ];
 
 const PlaylistList = (props: Props) => {
-  const selectedId = "234";
+  const [selectedId, setSelectedId] = useState("234");
 
-  const select = (id:string) => {
-    // ?????
-  }
+  const select = (id: string) => {
+    setSelectedId(id);
+  };
 
   return (
     <div>
-      <div className="flex flex-col gap-2">
-        <div className="px-2 py-5 border-b border-solid border-gray-500 bg-blue-500 text-white">
-          1. Playlist{" "}
-        </div>
-        <div className="px-2 py-5 border-b border-solid border-gray-500">
-          1. Playlist{" "}
-        </div>
-        <div className="px-2 py-5 border-b border-solid border-gray-500">
-          1. Playlist{" "}
-        </div>
+      <div className="grid grid-cols-1 gap-2  divide-solid divide-y-2 divide-gray-400">
+        {/* <div className="px-4 border-0 py-5 bg-blue-500 text-white pb-7 -mb-2">1. Playlist </div>
+        <div className="px-4 border-0 py-5">1. Playlist </div> */}
+
+        {playlists.map((playlist, i) => (
+          <div
+            className={
+              "px-4 border-0 py-5 " +
+              (selectedId === playlist.id
+                ? "bg-blue-500 text-white pb-7 -mb-2"
+                : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
+            }
+            key={playlist.id}
+            onClick={() => select(playlist.id)}
+          >
+            {i + 1}. {playlist.name}
+          </div>
+        ))}
       </div>
     </div>
   );
