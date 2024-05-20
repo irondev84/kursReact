@@ -45,7 +45,10 @@ const PlaylistList = (props: Props) => {
                 : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
             }
             key={playlist.id}
-            onClick={() => select(playlist.id)}
+            onClick={(event) => {
+              // Closure
+              select(playlist.id);
+            }}
           >
             {i + 1}. {playlist.name}
           </div>
