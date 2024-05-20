@@ -1,3 +1,4 @@
+import { Button } from "primereact/button";
 import React, { useState } from "react";
 
 type Props = {};
@@ -52,6 +53,10 @@ const PlaylistEditor = (props: Props) => {
             disabled={true}
           ></textarea>
         </div>
+
+        <Button onClick={undefined} severity="danger">
+          Cancel
+        </Button>
       </div>
     </div>
   );

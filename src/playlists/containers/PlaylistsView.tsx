@@ -10,12 +10,16 @@ type Props = {};
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
 
-  const [selectedId, setSelectedId] = useState("234");
   const [playlists] = useState(mockPlaylists);
+  const [selectedId, setSelectedId] = useState("234");
+  const [selected, setSelected] = useState(mockPlaylists[1]);
 
+  const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
 
-  const selectPlaylistById = (id: string) => setSelectedId(id);
+  const selectPlaylistById = (id: string) => {
+    setSelectedId(id);
+  };
 
   return (
     <div>
@@ -31,18 +35,15 @@ const PlaylistsView = (props: Props) => {
         </div>
 
         <div className="flex flex-col gap-5">
-          {mode === "details" && <PlaylistDetails />}
+          {mode === "details" && (
+            <PlaylistDetails playlist={selected} onEdit={showEditor} />
+          )}
 
-          {mode !== "editor" || <PlaylistEditor />}
+          {mode !== "editor" || (
+            <PlaylistEditor playlist={selected} onCancel={showDetails} />
+          )}
 
-          <div>
-            <Button onClick={showEditor} severity="success">
-              Edit
-            </Button>
-            <Button onClick={() => setMode("details")} severity="danger">
-              Cancel
-            </Button>
-          </div>
+          <div></div>
         </div>
       </div>
     </div>

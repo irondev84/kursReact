@@ -1,5 +1,6 @@
 // tsrafce
 
+import { Button } from "primereact/button";
 import React from "react";
 
 type Props = {};
@@ -30,6 +31,10 @@ const PlaylistDetails = (props: Props) => {
           <div>{playlist.description}</div>
         </div>
       </div>
+
+      <Button onClick={undefined} severity="success">
+        Edit
+      </Button>
     </div>
   );
 };
