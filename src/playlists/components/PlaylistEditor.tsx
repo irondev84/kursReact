@@ -10,19 +10,17 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
+  const inputChangeHandler = (event: /* ??? */) => {
+    console.log(event);
+    
+  }
+
   return (
     <div>
       <div className="flex flex-col gap-5">
-
-      
-      Warning: You provided a `checked` prop to a form field without an `onChange` handler. 
-      This will render a read-only field. 
-      If the field should be mutable use `defaultChecked`. 
-      Otherwise, set either `onChange` or `readOnly`.
-
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input type="text" defaultValue={playlist.name} />
+          <input type="text" onClick={inputChangeHandler} />
         </div>
         
         <div className="flex">
