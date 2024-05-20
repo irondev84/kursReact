@@ -41,6 +41,16 @@ Done. Now run:
   npm install  
   npm run dev  
 
+# Extensions
+https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode 
++ eslint + eslint-prettier
+https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors
+
+https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype
+
+https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
+
 # UI Components
 https://mui.com/material-ui/react-button/
 https://primereact.org/installation/ 
@@ -62,3 +72,14 @@ https://headlessui.com/react/menu
 
 # Prime react
 npm install primereact
+
+# Playlists
+
+mkdir -p src/playlists/containers
+mkdir -p src/playlists/components 
+
+touch src/playlists/containers/PlaylistsView.tsx
+
+touch src/playlists/components/PlaylistList.tsx
+touch src/playlists/components/PlaylistDetails.tsx
+touch src/playlists/components/PlaylistEditor.tsx
