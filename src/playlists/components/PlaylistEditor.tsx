@@ -3,7 +3,6 @@ import React from "react";
 type Props = {};
 
 const PlaylistEditor = (props: Props) => {
-
   const playlist = {
     id: "123",
     name: "Playlist 123",
@@ -14,18 +13,28 @@ const PlaylistEditor = (props: Props) => {
   return (
     <div>
       <div className="flex flex-col gap-5">
+
+      
+      Warning: You provided a `checked` prop to a form field without an `onChange` handler. 
+      This will render a read-only field. 
+      If the field should be mutable use `defaultChecked`. 
+      Otherwise, set either `onChange` or `readOnly`.
+
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input type="text" value={'playlist 123'}/>
+          <input type="text" defaultValue={playlist.name} />
         </div>
+        
         <div className="flex">
-          <input type="checkbox" checked={true}/>
+          <input type="checkbox" defaultChecked={playlist.public} />
           <strong>Public</strong>
         </div>
+        
         <div className="flex flex-col">
           <strong>Description</strong>
-          <textarea value={'super playlsit'}></textarea>
+          <textarea value={playlist.description} readOnly={true} disabled={true}></textarea>
         </div>
+
       </div>
     </div>
   );
