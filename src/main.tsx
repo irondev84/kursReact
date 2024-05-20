@@ -6,7 +6,16 @@ window.React = React;
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
-const users = [
+interface User {
+  id: string;
+  name: string;
+  pet: {
+    name: string;
+  };
+  color: string;
+}
+
+const users: User[] = [
   {
     id: "123",
     name: "Alice",
@@ -28,8 +37,12 @@ const users = [
 ];
 const user = users[0];
 
-const PersonCard = (props) =>
-  React.createElement(
+type PersonCardProps = {
+  user: User;
+};
+
+// Function Component 
+const PersonCard = (props: PersonCardProps) => React.createElement(
     "div",
     {
       id: props.user.id,
@@ -40,14 +53,12 @@ const PersonCard = (props) =>
       },
     },
     React.createElement(
-      "p",
-      {},
-      `${props.user.name} as a ${props.user.pet.name}`
+      "p", {},`${props.user.name} as a ${props.user.pet.name}`
     )
     // React.createElement("input", { key: "pamietaj mnie" })
   );
 
-root.render(PersonCard(users[1]));
+root.render(PersonCard({ user: users[0] }));
 
 // ReactDOM.createRoot(document.getElementById('root')!).render(
 //   <React.StrictMode>
