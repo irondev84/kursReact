@@ -23,7 +23,7 @@ const PlaylistList = ({ playlists, onSelect, selectedId }: Props) => {
                 ? "bg-blue-500 text-white pb-7 -mb-2"
                 : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
             }
-            onClick={(event) => select(playlist.id)}
+            onClick={() => select(playlist.id)}
           >
             {i + 1}. {playlist.name}
           </div>

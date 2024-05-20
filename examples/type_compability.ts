@@ -17,3 +17,15 @@ p = v
 
 if ('length' in p)  // Narrowing
     (p as Vector).length // Casting
+
+
+// Contravariance
+
+let calculate: (v: Point, id: string) => void
+
+// calculate = (v: Vector) => { } // Error
+// calculate = (v: Point, id:string, x:string) => { } // Error
+calculate = () => { }
+calculate = (v: Point) => { }
+calculate = (v: Point, id: string) => { }
+calculate = (v: { x: number }) => { }
