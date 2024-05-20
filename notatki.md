@@ -40,3 +40,24 @@ Done. Now run:
   cd sagesreact
   npm install  
   npm run dev  
+
+# UI Components
+https://mui.com/material-ui/react-button/
+https://primereact.org/installation/ 
+
+
+# Tailwind
+https://tailwindcss.com/docs/guides/vite
+
+npm install -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
+
+tailwind.config.js already exists.
+Created PostCSS config file: postcss.config.js
+
+# Headless
+https://headlessui.com/react/menu
+
+# Prime react
+npm install primereact
