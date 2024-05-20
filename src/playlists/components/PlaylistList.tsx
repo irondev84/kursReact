@@ -38,13 +38,13 @@ const PlaylistList = (props: Props) => {
 
         {playlists.map((playlist, i) => (
           <div
+            key={playlist.id}
             className={
               "px-4 border-0 py-5 " +
               (selectedId === playlist.id
                 ? "bg-blue-500 text-white pb-7 -mb-2"
                 : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
             }
-            key={playlist.id}
             onClick={(event) => {
               // Closure
               select(playlist.id);
