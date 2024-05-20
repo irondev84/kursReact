@@ -1,31 +1,13 @@
 import React, { useState } from "react";
+import { mockPlalists } from "../containers/mockPlaylists";
+import { Playlist } from "../containers/Playlist";
 
 type Props = {};
 
-const playlists = [
-  {
-    id: "123",
-    name: "Playlist 123",
-    public: false,
-    description: "Best playlist",
-  },
-  {
-    id: "234",
-    name: "Playlist 234",
-    public: true,
-    description: "awesome playlist",
-  },
-  {
-    id: "345",
-    name: "Playlist 345",
-    public: false,
-    description: "Cool playlist",
-  },
-];
-
 const PlaylistList = (props: Props) => {
-  const [selectedId, setSelectedId] = useState("234");
+  const playlists: Playlist[] = [];
 
+  const [selectedId, setSelectedId] = useState("234");
   const select = (id: string) => {
     setSelectedId(id);
   };
