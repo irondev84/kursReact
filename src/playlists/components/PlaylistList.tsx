@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Playlist } from "../containers/Playlist";
 
 type Props = {
-  playlists: Playlist[];
+  // playlists: Playlist[];
+  playlists: { name: string; id: string }[]; // Covariant!
   selectedId: string;
   onSelect: (id: string) => void;
 };
