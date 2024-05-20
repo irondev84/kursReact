@@ -41,7 +41,6 @@ type PersonCardProps = {
   user: User;
 };
 
-// Function Component
 const PersonCard = (props: PersonCardProps) =>
   React.createElement(
     "div",
@@ -58,23 +57,18 @@ const PersonCard = (props: PersonCardProps) =>
       {},
       `${props.user.name} as a ${props.user.pet.name}`
     )
-    // React.createElement("input", { key: "pamietaj mnie" })
   );
 
 // List of persons
-// const PersonList = (props: 'moj lewy but') => React.createElement("ul", {}, [
-
 const PersonList = (props: { users: User[] }) =>
   React.createElement(
     "ul",
     {},
     props.users.map((user) =>
-      React.createElement("ul", { key: user.id }, PersonCard({ user }))
+      // React.createElement("ul", { key: user.id }, PersonCard({ user })) // Immediate   -> {type:'div', children:{...}}
+      React.createElement("ul",{ key: user.id }, React.createElement(PersonCard, { user })) // Lazy -> {type: PersonCard, props:{}, children: ??? }
     )
   );
-// React.createElement("ul", {}, [
-//   PersonCard({ user: props.users[0] }),
-// ]);
 
 root.render(PersonList({ users: users }));
 
