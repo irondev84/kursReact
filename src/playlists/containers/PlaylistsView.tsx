@@ -22,9 +22,6 @@ const PlaylistsView = (props: Props) => {
       <div className="grid grid-cols-2 gap-5">
         <div>
           <PlaylistList playlists={mockPlaylists} />
-
-          {/* <PlaylistList value={playlists[0].name} />
-          <input type="text" placki={playlists[0].name} /> */}
         </div>
 
         <div className="flex flex-col gap-5">

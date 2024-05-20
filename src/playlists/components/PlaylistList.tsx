@@ -3,10 +3,13 @@ import { Playlist } from "../containers/Playlist";
 
 type Props = {
   playlists: Playlist[];
+  // x: 1;
 };
 
-const PlaylistList = (props: Props) => {
-  const playlists = props.playlists;
+const PlaylistList = ({ playlists }: Props) => {
+  // const playlists = props.playlists;
+  // const x = props.x;
+  // const { playlists/* , x  */} = props;
 
   const [selectedId, setSelectedId] = useState("234");
   const select = (id: string) => {
@@ -16,9 +19,6 @@ const PlaylistList = (props: Props) => {
   return (
     <div>
       <div className="grid grid-cols-1 gap-2  divide-solid divide-y-2 divide-gray-400">
-        {/* <div className="px-4 border-0 py-5 bg-blue-500 text-white pb-7 -mb-2">1. Playlist </div>
-        <div className="px-4 border-0 py-5">1. Playlist </div> */}
-
         {playlists.map((playlist, i) => (
           <div
             key={playlist.id}
@@ -28,10 +28,7 @@ const PlaylistList = (props: Props) => {
                 ? "bg-blue-500 text-white pb-7 -mb-2"
                 : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
             }
-            onClick={(event) => {
-              // Closure
-              select(playlist.id);
-            }}
+            onClick={(event) => select(playlist.id)}
           >
             {i + 1}. {playlist.name}
           </div>
