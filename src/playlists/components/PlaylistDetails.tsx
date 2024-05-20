@@ -14,9 +14,6 @@ const PlaylistDetails = (props: Props) => {
 
   return (
     <div>
-      {/* div.flex.flex-col.gap-5>div.flex.flex-col*3>div{Name}+div{Playlist abc} */}
-      {/* { if(){} else{} switch{} function{} } */} {/* -- not Allowed */}
-      {true} {false} {null} {undefined} {/* --- Ignored */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>

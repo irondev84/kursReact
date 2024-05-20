@@ -16,7 +16,7 @@ const PlaylistsView = (props: Props) => {
           <PlaylistList />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-5">
           <PlaylistDetails />
           <PlaylistEditor />
         </div>
