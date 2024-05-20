@@ -64,13 +64,45 @@ const PersonList = (props: { users: User[] }) =>
   React.createElement(
     "ul",
     {},
-    props.users.map((user) =>
-      // React.createElement("ul", { key: user.id }, PersonCard({ user })) // Immediate   -> {type:'div', children:{...}}
-      React.createElement("ul",{ key: user.id }, React.createElement(PersonCard, { user })) // Lazy -> {type: PersonCard, props:{}, children: ??? }
+    props.users.map(
+      (user) =>
+        // React.createElement("ul", { key: user.id }, PersonCard({ user })) // Immediate   -> {type:'div', children:{...}}
+        React.createElement(
+          "ul",
+          { key: user.id },
+          React.createElement(PersonCard, { user })
+        ) // Lazy -> {type: PersonCard, props:{}, children: ??? }
     )
   );
+// root.render(PersonList({ users: users }));
 
-root.render(PersonList({ users: users }));
+// const div = <div>Ala ma kota</div>
+// const div = React.createElement('div',{},'Ala ma kota')
+
+const PersonCardX = (props: PersonCardProps) => (
+  <div
+    className="person-card"
+    id={props.user.id}
+    title={props.user.name}
+    style={{ color: props.user.color }}
+  >
+    <p>
+      {props.user.name} as a {props.user.pet.name}
+    </p>
+  </div>
+);
+
+const PersonListX = (props: { users: User[] }) => (
+  <ul>
+    {props.users.map((user) => (
+      <ul key={user.id}>
+        <PersonCard user={user} />
+      </ul>
+    ))}
+  </ul>
+);
+
+root.render(<PersonListX users={users} />);
 
 // ReactDOM.createRoot(document.getElementById('root')!).render(
 //   <React.StrictMode>
