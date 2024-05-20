@@ -15,19 +15,22 @@ const PlaylistDetails = (props: Props) => {
   return (
     <div>
       {/* div.flex.flex-col.gap-5>div.flex.flex-col*3>div{Name}+div{Playlist abc} */}
-
+      {/* { if(){} else{} switch{} function{} } */} {/* -- not Allowed */}
+      {true} {false} {null} {undefined} {/* --- Ignored */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <div>Playlist abc</div>
+          <div>{playlist.name}</div>
         </div>
         <div className="flex flex-col">
           <strong>Public</strong>
-          <div>Yes</div>
+          <div style={{ color: playlist.public ? "red" : "green" }}>
+            {playlist.public ? "Yes" : "No"}
+          </div>
         </div>
         <div className="flex flex-col">
           <strong>Description</strong>
-          <div>Best playlist ever</div>
+          <div>{playlist.description}</div>
         </div>
       </div>
     </div>
