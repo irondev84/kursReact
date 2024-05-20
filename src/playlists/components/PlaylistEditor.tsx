@@ -1,19 +1,22 @@
 import { Button } from "primereact/button";
 import React, { useState } from "react";
+import { Playlist } from "../containers/Playlist";
 
-type Props = {};
-const playlist = {
-  id: "123",
-  name: "Playlist 123",
-  public: false,
-  description: "Best playlist",
+type Props = {
+  playlist: Playlist;
+  onCancel: () => void;
+  onSave: (draft: Playlist) => void;
 };
 
-const PlaylistEditor = (props: Props) => {
+const PlaylistEditor = ({ onCancel, playlist, onSave }: Props) => {
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPlaylistDraft({ ...playlistDraft, name: event.target.value });
+  };
+
+  const submit = () => {
+    onSave(playlistDraft);
   };
 
   return (
@@ -48,15 +51,24 @@ const PlaylistEditor = (props: Props) => {
         <div className="flex flex-col">
           <strong>Description</strong>
           <textarea
-            value={playlist.description}
-            readOnly={true}
-            disabled={true}
+            value={playlistDraft.description}
+            onChange={(event) =>
+              setPlaylistDraft({
+                ...playlistDraft,
+                description: event.target.value,
+              })
+            }
           ></textarea>
         </div>
 
-        <Button onClick={undefined} severity="danger">
-          Cancel
-        </Button>
+        <div>
+          <Button onClick={onCancel} severity="danger">
+            Cancel
+          </Button>
+          <Button onClick={submit} severity="success">
+            Save
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistList from "../components/PlaylistList";
 import { Button } from "primereact/button";
 import { mockPlaylists } from "./mockPlaylists";
+import { Playlist } from "./Playlist";
 
 type Props = {};
 
@@ -17,8 +18,10 @@ const PlaylistsView = (props: Props) => {
   const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
 
+  const savePlaylist = (draft: Playlist) => {};
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
+    setSelected(playlists.find((p) => p.id == id)!);
   };
 
   return (
@@ -40,7 +43,11 @@ const PlaylistsView = (props: Props) => {
           )}
 
           {mode !== "editor" || (
-            <PlaylistEditor playlist={selected} onCancel={showDetails} />
+            <PlaylistEditor
+              playlist={selected}
+              onSave={savePlaylist}
+              onCancel={showDetails}
+            />
           )}
 
           <div></div>
