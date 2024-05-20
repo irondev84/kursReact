@@ -3,13 +3,13 @@ import PlaylistEditor from "../components/PlaylistEditor";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistList from "../components/PlaylistList";
 import { Button } from "primereact/button";
-import { mockPlalists } from "./mockPlaylists";
+import { mockPlaylists } from "./mockPlaylists";
 
 type Props = {};
 
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor">("details");
-  const playlists = mockPlalists;
+  const playlists = mockPlaylists;
 
   // const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
@@ -20,7 +20,8 @@ const PlaylistsView = (props: Props) => {
 
       <div className="grid grid-cols-2 gap-5">
         <div>
-          <PlaylistList />
+          <PlaylistList playlists={mockPlaylists} />
+
           {/* <PlaylistList value={playlists[0].name} />
           <input type="text" placki={playlists[0].name} /> */}
         </div>
