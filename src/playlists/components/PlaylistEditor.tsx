@@ -10,12 +10,11 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
-  useState(playlist.name);
+  const [playlistName, setPlaylistName] = useState(playlist.name);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(event);
-
-    playlist.name = event.target.value; /// ???
+    // replace value & mark component as DIRTY!
+    setPlaylistName(event.target.value);
   };
 
   return (
@@ -23,7 +22,8 @@ const PlaylistEditor = (props: Props) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input type="text" value={playlist.name} onChange={eventHandler} />
+          <input type="text" value={playlistName} onChange={eventHandler} />
+          <span>{playlistName.length} / 100</span>
         </div>
 
         <div className="flex">
