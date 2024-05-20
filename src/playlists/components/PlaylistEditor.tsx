@@ -10,11 +10,20 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
-  const [playlistName, setPlaylistName] = useState(playlist.name);
+  // const [playlistName, setPlaylistName] = useState(playlist.name);
+  // const [playlistPublic, setPlaylistPublic] = useState(playlist.public);
+
+  const [playlistState, setPlaylistState] = useState(playlist);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    // replace value & mark component as DIRTY!
-    setPlaylistName(event.target.value);
+    // setPlaylistName(event.target.value);
+
+    // Mutable -> No Rerender
+    // playlistState.name = event.target.value;
+    // setPlaylistState(playlistState);
+
+    // Immutable -> Rerender!
+    setPlaylistState({ ...playlistState, name: event.target.value });
   };
 
   return (
@@ -22,8 +31,12 @@ const PlaylistEditor = (props: Props) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input type="text" value={playlistName} onChange={eventHandler} />
-          <span>{playlistName.length} / 100</span>
+          <input
+            type="text"
+            value={playlistState.name}
+            onChange={eventHandler}
+          />
+          <span>{playlistState.name.length} / 100</span>
         </div>
 
         <div className="flex">
