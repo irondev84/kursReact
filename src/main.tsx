@@ -62,14 +62,21 @@ const PersonCard = (props: PersonCardProps) =>
   );
 
 // List of persons
-const PersonList = () =>
-  React.createElement("ul", {}, [
-    PersonCard({ user: users[0] }),
-    PersonCard({ user: users[1] }),
-    PersonCard({ user: users[8] }),
-  ]);
+// const PersonList = (props: 'moj lewy but') => React.createElement("ul", {}, [
 
-root.render(PersonList());
+const PersonList = (props: { users: User[] }) =>
+  React.createElement(
+    "ul",
+    {},
+    props.users.map((user) =>
+      React.createElement("ul", { key: user.id }, PersonCard({ user }))
+    )
+  );
+// React.createElement("ul", {}, [
+//   PersonCard({ user: props.users[0] }),
+// ]);
+
+root.render(PersonList({ users: users }));
 
 // ReactDOM.createRoot(document.getElementById('root')!).render(
 //   <React.StrictMode>
