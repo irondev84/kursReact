@@ -8,21 +8,17 @@ const PlaylistEditor = (props: Props) => {
     name: "Playlist 123",
     public: false,
     description: "Best playlist",
+    tracks: [{}, {}],
   };
 
-  // const [playlistName, setPlaylistName] = useState(playlist.name);
+  const [playlistName, setPlaylistName] = useState(playlist.name);
   // const [playlistPublic, setPlaylistPublic] = useState(playlist.public);
 
   const [playlistState, setPlaylistState] = useState(playlist);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    // setPlaylistName(event.target.value);
+    setPlaylistName(event.target.value);
 
-    // Mutable -> No Rerender
-    // playlistState.name = event.target.value;
-    // setPlaylistState(playlistState);
-
-    // Immutable -> Rerender!
     setPlaylistState({ ...playlistState, name: event.target.value });
   };
 
