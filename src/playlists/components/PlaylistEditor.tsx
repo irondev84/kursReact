@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 
 type Props = {};
+const playlist = {
+  id: "123",
+  name: "Playlist 123",
+  public: false,
+  description: "Best playlist",
+  tracks: [{}, {}],
+};
 
 const PlaylistEditor = (props: Props) => {
-  const playlist = {
-    id: "123",
-    name: "Playlist 123",
-    public: false,
-    description: "Best playlist",
-    tracks: [{}, {}],
-  };
+  const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
-  const [playlistName, setPlaylistName] = useState(playlist.name);
-  // const [playlistPublic, setPlaylistPublic] = useState(playlist.public);
-
-  const [playlistState, setPlaylistState] = useState(playlist);
-
-  const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setPlaylistName(event.target.value);
-
-    setPlaylistState({ ...playlistState, name: event.target.value });
+  const nameEventHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setPlaylistDraft({ ...playlistDraft, name: event.target.value });
   };
 
   return (
@@ -29,14 +25,23 @@ const PlaylistEditor = (props: Props) => {
           <strong>Name</strong>
           <input
             type="text"
-            value={playlistState.name}
-            onChange={eventHandler}
+            value={playlist.name}
+            onChange={nameEventHandler}
           />
-          <span>{playlistState.name.length} / 100</span>
+          <span>{playlist.name.length} / 100</span>
         </div>
 
         <div className="flex">
-          <input type="checkbox" defaultChecked={playlist.public} />
+          <input
+            type="checkbox"
+            checked={playlist.public}
+            onChange={(event) =>
+              setPlaylistDraft({
+                ...playlistDraft,
+                public: event.target.checked,
+              })
+            }
+          />
           <strong>Public</strong>
         </div>
 
