@@ -6,35 +6,34 @@ const playlist = {
   name: "Playlist 123",
   public: false,
   description: "Best playlist",
-  tracks: [{}, {}],
 };
 
 const PlaylistEditor = (props: Props) => {
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
-  const nameEventHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPlaylistDraft({ ...playlistDraft, name: event.target.value });
   };
 
   return (
     <div>
+      <pre>{JSON.stringify(playlistDraft, null, 2)}</pre>
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
           <input
             type="text"
-            value={playlist.name}
-            onChange={nameEventHandler}
+            name="name"
+            value={playlistDraft.name}
+            onChange={eventHandler}
           />
-          <span>{playlist.name.length} / 100</span>
+          <span>{playlistDraft.name.length} / 100</span>
         </div>
 
         <div className="flex">
           <input
             type="checkbox"
-            checked={playlist.public}
+            checked={playlistDraft.public}
             onChange={(event) =>
               setPlaylistDraft({
                 ...playlistDraft,

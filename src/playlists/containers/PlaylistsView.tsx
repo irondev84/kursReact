@@ -11,7 +11,7 @@ const PlaylistsView = (props: Props) => {
       <h1 className="text-2xl leading-loose">Playlists</h1>
       {/* .grid.grid-cols-2>div*2 */}
 
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-5">
         <div>
           <PlaylistList />
         </div>
