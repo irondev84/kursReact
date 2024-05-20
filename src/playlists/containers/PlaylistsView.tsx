@@ -10,10 +10,12 @@ type Props = {};
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
 
-  const playlists = mockPlaylists;
+  const [selectedId, setSelectedId] = useState("234");
+  const [playlists] = useState(mockPlaylists);
 
-  // const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
+
+  const selectPlaylistById = (id: string) => setSelectedId(id);
 
   return (
     <div>
@@ -21,7 +23,11 @@ const PlaylistsView = (props: Props) => {
 
       <div className="grid grid-cols-2 gap-5">
         <div>
-          <PlaylistList playlists={mockPlaylists} />
+          <PlaylistList
+            playlists={playlists}
+            selectedId={selectedId}
+            onSelect={selectPlaylistById}
+          />
         </div>
 
         <div className="flex flex-col gap-5">

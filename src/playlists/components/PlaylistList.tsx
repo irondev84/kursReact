@@ -3,18 +3,12 @@ import { Playlist } from "../containers/Playlist";
 
 type Props = {
   playlists: Playlist[];
-  // x: 1;
+  selectedId: string;
+  onSelect: (id: string) => void;
 };
 
-const PlaylistList = ({ playlists }: Props) => {
-  // const playlists = props.playlists;
-  // const x = props.x;
-  // const { playlists/* , x  */} = props;
-
-  const [selectedId, setSelectedId] = useState("234");
-  const select = (id: string) => {
-    setSelectedId(id);
-  };
+const PlaylistList = ({ playlists, onSelect, selectedId }: Props) => {
+  const select = (id: string) => onSelect(id);
 
   return (
     <div>
