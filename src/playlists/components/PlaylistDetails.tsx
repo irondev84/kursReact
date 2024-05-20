@@ -1,15 +1,37 @@
-
-
 // tsrafce
 
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const PlaylistDetails = (props: Props) => {
-  return (
-    <div>PlaylistDetails</div>
-  )
-}
+  const playlist = {
+    id: "123",
+    name: "Playlist 123",
+    public: false,
+    description: "Best playlist",
+  };
 
-export default PlaylistDetails
+  return (
+    <div>
+      {/* div.flex.flex-col.gap-5>div.flex.flex-col*3>div{Name}+div{Playlist abc} */}
+
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col">
+          <strong>Name</strong>
+          <div>Playlist abc</div>
+        </div>
+        <div className="flex flex-col">
+          <strong>Public</strong>
+          <div>Yes</div>
+        </div>
+        <div className="flex flex-col">
+          <strong>Description</strong>
+          <div>Best playlist ever</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PlaylistDetails;
