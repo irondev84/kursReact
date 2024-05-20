@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {};
 
@@ -10,19 +10,20 @@ const PlaylistEditor = (props: Props) => {
     description: "Best playlist",
   };
 
-  const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {};
-    const placki = (e: React.MouseEvent<HTMLInputElement, MouseEvent>): void => { };
-  //   const inputChangeHandler = (event: 1234) => {
-  //   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {};
-  //   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (event: React.ChangeEvent<T>) => {};
-  //   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useState(playlist.name);
+
+  const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log(event);
+
+    playlist.name = event.target.value; /// ???
+  };
 
   return (
     <div>
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input type="text" onChange={eventHandler}  onClick={placki} />
+          <input type="text" value={playlist.name} onChange={eventHandler} />
         </div>
 
         <div className="flex">
