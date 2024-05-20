@@ -8,7 +8,8 @@ import { mockPlaylists } from "./mockPlaylists";
 type Props = {};
 
 const PlaylistsView = (props: Props) => {
-  const [mode, setMode] = useState<"details" | "editor">("details");
+  const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
+
   const playlists = mockPlaylists;
 
   // const showDetails = () => setMode("details");

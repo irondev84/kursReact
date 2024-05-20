@@ -24,4 +24,28 @@ function zapamietaj<const T>(v: T) {
     }
 }
 const domkniecie = zapamietaj('placki')
-const result = domkniecie() 
+const result = domkniecie()
+
+/* Generic use State Hook */
+const currentTreeNode = { dirty: false, value: '' as any } // Where are we now!?
+
+function useState<T>(initialValue: T) {
+
+    currentTreeNode.value = initialValue
+
+    function setValue(v: T) {
+        currentTreeNode.value = v
+        currentTreeNode.dirty = true
+        // Rerender Node!!!
+    }
+
+    return [currentTreeNode.value, setValue] as const
+}
+
+// const [getter, setter] = useState<'placki'|'krowa'>('placki')
+const [getter, setter] = useState<string>('placki')
+
+getter == 'placki'
+setter('krowa')
+// rerender!
+getter == 'krowa'
