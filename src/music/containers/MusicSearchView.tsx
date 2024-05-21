@@ -1,27 +1,20 @@
 import React from "react";
 import PageLayout from "../../shared/components/PageLayout";
-import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Card } from "primereact/card";
 import { searchAlbums } from "../../shared/musicAPI";
+import SearchForm from "./SearchForm";
 
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
-
-
-  searchAlbums('batman')
+  searchAlbums("batman");
 
   return (
     <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">
-        <div>
-          <div className="p-inputgroup flex-1">
-            <InputText placeholder="Keyword" />
-            <Button>Search</Button>
-          </div>
-        </div>
+        <SearchForm />
         <div>
           <div className="grid grid-cols-4 gap-5">
             {[1, 2, 3, 4, 5].map((album) => (
