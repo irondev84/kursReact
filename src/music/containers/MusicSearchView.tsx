@@ -4,10 +4,15 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Card } from "primereact/card";
+import { searchAlbums } from "../../shared/musicAPI";
 
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
+
+
+  searchAlbums('batman')
+
   return (
     <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">

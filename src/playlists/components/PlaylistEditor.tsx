@@ -80,7 +80,7 @@ const PlaylistEditor = ({
         <div className="flex flex-col">
           <strong>Description</strong>
           <InputTextarea
-            value={playlistDraft.name}
+            value={playlistDraft.description}
             onChange={(event) =>
               setPlaylistDraft({
                 ...playlistDraft,
