@@ -24,11 +24,20 @@ const PlaylistsView = (props: Props) => {
 
   const updatePlaylist = (draft: Playlist) => {
     const index = playlists.findIndex((p) => p.id == draft.id);
-    
-    // Mutation:
-    playlists[index] = draft;
 
-    setPlaylists(playlists);
+    // Mutation:
+    // playlists[index] = draft;
+    // setPlaylists(playlists);
+
+    // Defensive copy
+    const tempCopy = [...playlists];
+    tempCopy[index] = draft;
+    setPlaylists(tempCopy);
+
+
+    // Fake Immutable -> Change Reference
+    playlists[index] = draft;
+    setPlaylists([...playlists]);
   };
 
   return (
