@@ -38,12 +38,12 @@ const PlaylistEditor = ({
 
   return (
     <div>
-      <pre>{JSON.stringify(playlist, null, 2)}</pre>
-      <pre>{JSON.stringify(playlistDraft, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(playlist, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(playlistDraft, null, 2)}</pre> */}
 
       {isStale && (
         <p>
-          Playlist is out of date -{" "}
+          Playlist is out of date -
           <a href="#" onClick={() => setPlaylistDraft(playlist)}>
             Refresh?
           </a>

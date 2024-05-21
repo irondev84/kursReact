@@ -90,3 +90,7 @@ touch src/playlists/components/PlaylistEditor.tsx
 - useEffect
 - useRef 
 - useId 
+
+# React Router
+npm i react-router-dom
+
