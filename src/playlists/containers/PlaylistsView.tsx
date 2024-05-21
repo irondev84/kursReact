@@ -4,6 +4,7 @@ import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistList from "../components/PlaylistList";
 import { mockPlaylists } from "./mockPlaylists";
 import { Playlist } from "./Playlist";
+import { Button } from "primereact/button";
 
 type Props = {};
 
@@ -24,11 +25,15 @@ const PlaylistsView = (props: Props) => {
 
   const updatePlaylist = (draft: Playlist) => {
     setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    setSelected(draft);
+    showDetails();
   };
 
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
     // TODO: add to list!
+    setSelected(draft);
+    showDetails();
   };
 
   return (
@@ -36,12 +41,18 @@ const PlaylistsView = (props: Props) => {
       <h1 className="text-2xl leading-loose">Playlists</h1>
 
       <div className="grid grid-cols-2 gap-5">
-        <div>
+        <div className="flex flex-col gap-5">
           <PlaylistList
             playlists={playlists}
             selectedId={selectedId}
             onSelect={selectPlaylistById}
           />
+
+          <div className="flex justify-end">
+            <Button onClick={() => setMode("creator")}>
+              Create new playlist
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-5">
