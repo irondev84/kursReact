@@ -9,12 +9,16 @@ import SearchForm from "./SearchForm";
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
-  searchAlbums("batman");
+  const search = (keyword: string) => {
+    console.log("Search", keyword);
+
+    searchAlbums(keyword);
+  };
 
   return (
     <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">
-        <SearchForm />
+        <SearchForm onSearch={search} />
         <div>
           <div className="grid grid-cols-4 gap-5">
             {[1, 2, 3, 4, 5].map((album) => (

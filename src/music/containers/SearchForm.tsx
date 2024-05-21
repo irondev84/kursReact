@@ -1,19 +1,21 @@
-import React from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 
-type Props = {};
+type Props = { onSearch: (keyword: string) => void };
 
-const SearchForm = (props: Props) => {
-
-  
+const SearchForm = ({ onSearch }: Props) => {
+  const [queryDraft, setQueryDraft] = useState("");
 
   return (
     <div>
       <div>
         <div className="p-inputgroup flex-1">
-          <InputText placeholder="Keyword" />
-          <Button>Search</Button>
+          <InputText
+            placeholder="Search albums"
+            value={queryDraft}
+            onChange={(e) => setQueryDraft(e.target.value)}
+          />
+          <Button onClick={() => onSearch(queryDraft)}>Search</Button>
         </div>
       </div>
     </div>
