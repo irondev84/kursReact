@@ -17,15 +17,13 @@ const MusicSearchView = (props: Props) => {
   const search = (keyword: string) => {
     console.log("Search", keyword);
 
-    searchAlbums(keyword).then((res) => {
-      searchAlbums(keyword)
-        .then((data) => {
-          setResults(data);
-        })
-        .catch((error) => {
-          setMessage(error.message);
-        });
-    });
+    searchAlbums(keyword)
+      .then((data) => {
+        setResults(data);
+      })
+      .catch((error) => {
+        setMessage(error.message);
+      });
   };
 
   return (
