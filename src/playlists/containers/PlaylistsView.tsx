@@ -23,23 +23,15 @@ const PlaylistsView = (props: Props) => {
   };
 
   const updatePlaylist = (draft: Playlist) => {
-    const index = playlists.findIndex((p) => p.id == draft.id);
-
     // Mutation:
-    // playlists[index] = draft;
-    // setPlaylists(playlists);
-
-    // Defensive copy
-    const tempCopy = [...playlists];
-    tempCopy[index] = draft;
-    setPlaylists(tempCopy);
-
-    // Fake Immutable -> Change Reference
+    const index = playlists.findIndex((p) => p.id == draft.id);
     playlists[index] = draft;
-    setPlaylists([...playlists]);
+    setPlaylists(playlists); // NO Rerender
+
+    showDetails(); // Rerender
 
     // Immutable
-    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    // setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
   };
 
   return (
