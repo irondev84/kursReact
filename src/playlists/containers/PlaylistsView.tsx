@@ -46,17 +46,21 @@ const PlaylistsView = (props: Props) => {
   // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
   // setSelected(playlists.find((p) => p.id == selectedId));
 
-  useEffect(() => {
-    console.log("After DOM Render");
-  });
+  useEffect(
+    () => setSelected(playlists.find((p) => p.id == selectedId)),
+    [selectedId]
+  );
+
+  useEffect(() => console.log("After DOM Render"));
+  useEffect(() => console.log("After DOM - if deps changed"), [selectedId]);
+  
+  useEffect(() => console.log("After first Render ONLY"), [/* 'placki',true, 123 */]);
 
   console.log("Render VDOM");
 
   return (
     <div>
-      <h1 className="text-2xl leading-loose" id="test">
-        Playlists
-      </h1>
+      <h1 className="text-2xl leading-loose">Playlists</h1>
 
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col gap-5">
