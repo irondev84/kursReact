@@ -34,10 +34,12 @@ const PlaylistsView = (props: Props) => {
     tempCopy[index] = draft;
     setPlaylists(tempCopy);
 
-
     // Fake Immutable -> Change Reference
     playlists[index] = draft;
     setPlaylists([...playlists]);
+
+    // Immutable
+    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
   };
 
   return (
