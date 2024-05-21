@@ -10,7 +10,7 @@ type Props = {};
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
 
-  const [playlists] = useState(mockPlaylists);
+  const [playlists, setPlaylists] = useState(mockPlaylists);
   const [selectedId, setSelectedId] = useState("234");
   const [selected, setSelected] = useState(mockPlaylists[1]);
 
@@ -22,10 +22,15 @@ const PlaylistsView = (props: Props) => {
     setSelected(playlists.find((p) => p.id == id)!);
   };
 
-  const savePlaylist = (draft: Playlist) => {
-    // TODO: Update playlists 
+  const updatePlaylist = (draft: Playlist) => {
+    const index = playlists.findIndex((p) => p.id == draft.id);
+    
+    // Mutation:
+    playlists[index] = draft;
+
+    setPlaylists(playlists);
   };
-  
+
   return (
     <div>
       <h1 className="text-2xl leading-loose">Playlists</h1>
@@ -47,7 +52,7 @@ const PlaylistsView = (props: Props) => {
           {mode !== "editor" || (
             <PlaylistEditor
               playlist={selected}
-              onSave={savePlaylist}
+              onSave={updatePlaylist}
               onCancel={showDetails}
             />
           )}
