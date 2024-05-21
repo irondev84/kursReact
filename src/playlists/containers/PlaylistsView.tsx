@@ -26,6 +26,11 @@ const PlaylistsView = (props: Props) => {
     setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
   };
 
+  const createPlaylist = (draft: Playlist) => {
+    draft.id = crypto.randomUUID();
+    // TODO: add to list!
+  };
+
   return (
     <div>
       <h1 className="text-2xl leading-loose">Playlists</h1>
@@ -53,10 +58,7 @@ const PlaylistsView = (props: Props) => {
           )}
 
           {mode !== "creator" || (
-            <PlaylistEditor
-              onSave={updatePlaylist}
-              onCancel={showDetails}
-            />
+            <PlaylistEditor onSave={createPlaylist} onCancel={showDetails} />
           )}
 
           <div></div>

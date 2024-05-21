@@ -16,14 +16,11 @@ const EMPTY_PLAYLIST: Playlist = {
 };
 
 const PlaylistEditor = ({
-  playlist = EMPTY_PLAYLIST, // EMPTY_PLAYLIST if playlist undefined
+  playlist = EMPTY_PLAYLIST,
   onCancel,
   onSave,
 }: Props) => {
-  // playlist = playlist || EMPTY_PLAYLIST //  null-like
-  // playlist ??= EMPTY_PLAYLIST; // undefined
-
-  const [playlistDraft, setPlaylistDraft] = useState(playlist);
+  const [playlistDraft, setPlaylistDraft] = useState(playlist); 
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPlaylistDraft({ ...playlistDraft, name: event.target.value });
