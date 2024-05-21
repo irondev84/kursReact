@@ -9,35 +9,23 @@ import { addItem, replaceItemById } from "./addItem";
 
 type Props = {};
 
-// ------
-
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
 
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [selected, setSelected] = useState<Playlist | undefined>();
+  const [playlists, setPlaylists] = useState(mockPlaylists);
 
   const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
 
-  /// _____________________
-
-  const [playlists, setPlaylists] = useState(mockPlaylists);
-
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
-
-    // const effect = addItem(draft);
-    // setPlaylists(effect);
-
     setPlaylists(addItem(draft));
-
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
   };
-
-  /// _____________________
 
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
@@ -46,9 +34,7 @@ const PlaylistsView = (props: Props) => {
   };
 
   const updatePlaylist = (draft: Playlist) => {
-    // setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
     setPlaylists(replaceItemById(draft));
-
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
