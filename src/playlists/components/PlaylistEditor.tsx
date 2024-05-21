@@ -45,6 +45,7 @@ const PlaylistEditor = ({
         <div className="flex flex-col">
           <strong>Name</strong>
           <InputText
+            data-testid="playlistName"
             id={"playlistNameRef" + uid}
             ref={playlistNameRef}
             name="name"
