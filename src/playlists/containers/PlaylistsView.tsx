@@ -19,19 +19,27 @@ const PlaylistsView = (props: Props) => {
 
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
-    setSelected(playlists.find((p) => p.id == id)!);
+    // const found = playlists.find((p) => p.id == id) as any
+    // const x = found.get.me.a.million.dollars.now() // Error?
+
+    // const found = playlists.find((p) => p.id == id) as Playlist
+    // const found = playlists.find((p) => p.id == id)!
+    // const found = {} as Playlist
+    // found.name.toLocaleLowerCase() // Error?
+
+    const found = playlists.find((p) => p.id == id);
+
+    if (found) setSelected(found); // Playlist
+    else if (found == undefined) found; // undefined
+    else {
+      // Exhaustiveness Check
+      found satisfies never; // never
+      throw new Error("Unexpected data");
+    }
   };
 
   const updatePlaylist = (draft: Playlist) => {
-    // Mutation:
-    const index = playlists.findIndex((p) => p.id == draft.id);
-    playlists[index] = draft;
-    setPlaylists(playlists); // NO Rerender
-
-    showDetails(); // Rerender
-
-    // Immutable
-    // setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
   };
 
   return (
