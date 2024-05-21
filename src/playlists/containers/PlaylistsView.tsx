@@ -44,14 +44,20 @@ const PlaylistsView = (props: Props) => {
             <PlaylistDetails playlist={selected} onEdit={showEditor} />
           )}
 
-          {/*
           {mode !== "editor" || (
             <PlaylistEditor
               playlist={selected}
               onSave={updatePlaylist}
               onCancel={showDetails}
             />
-          )} */}
+          )}
+
+          {mode !== "creator" || (
+            <PlaylistEditor
+              onSave={updatePlaylist}
+              onCancel={showDetails}
+            />
+          )}
 
           <div></div>
         </div>

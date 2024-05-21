@@ -9,8 +9,12 @@ type Props = {
 };
 
 const PlaylistDetails = ({ onEdit, playlist }: Props) => {
-  if (playlist == undefined) // Function Guard / Type Guard
-    return <p className="text-blue-600 p-5">No playlist selected</p>;
+  // Function Guard / Type Guard
+  if (playlist == undefined) return (
+    <p className="text-blue-600 p-4 border border-solid border-blue-600">
+      No playlist selected
+    </p>
+  );
 
   return (
     <div>

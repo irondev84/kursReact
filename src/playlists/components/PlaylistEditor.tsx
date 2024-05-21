@@ -3,12 +3,26 @@ import React, { useState } from "react";
 import { Playlist } from "../containers/Playlist";
 
 type Props = {
-  playlist: Playlist;
+  playlist?: Playlist;
   onCancel: () => void;
   onSave: (draft: Playlist) => void;
 };
 
-const PlaylistEditor = ({ onCancel, playlist, onSave }: Props) => {
+const EMPTY_PLAYLIST: Playlist = {
+  id: "",
+  name: "",
+  description: "",
+  public: false,
+};
+
+const PlaylistEditor = ({
+  playlist = EMPTY_PLAYLIST, // EMPTY_PLAYLIST if playlist undefined
+  onCancel,
+  onSave,
+}: Props) => {
+  // playlist = playlist || EMPTY_PLAYLIST //  null-like
+  // playlist ??= EMPTY_PLAYLIST; // undefined
+
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
