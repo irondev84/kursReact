@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PlaylistEditor from "../components/PlaylistEditor";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistList from "../components/PlaylistList";
-import { Button } from "primereact/button";
 import { mockPlaylists } from "./mockPlaylists";
 import { Playlist } from "./Playlist";
 
@@ -18,12 +17,15 @@ const PlaylistsView = (props: Props) => {
   const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
 
-  const savePlaylist = (draft: Playlist) => {};
   const selectPlaylistById = (id: string) => {
     setSelectedId(id);
     setSelected(playlists.find((p) => p.id == id)!);
   };
 
+  const savePlaylist = (draft: Playlist) => {
+    // TODO: Update playlists 
+  };
+  
   return (
     <div>
       <h1 className="text-2xl leading-loose">Playlists</h1>
