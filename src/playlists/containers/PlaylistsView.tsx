@@ -19,12 +19,14 @@ const PlaylistsView = (props: Props) => {
   const showEditor = () => setMode("editor");
 
   const selectPlaylistById = (id: string) => {
+    if (mode !== "details") return;
     setSelectedId(id);
     setSelected(playlists.find((p) => p.id == id));
   };
 
   const updatePlaylist = (draft: Playlist) => {
     setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
   };
@@ -32,6 +34,7 @@ const PlaylistsView = (props: Props) => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
     // TODO: add to list!
+    setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
   };
