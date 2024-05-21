@@ -8,7 +8,12 @@ const SearchForm = ({ onSearch }: Props) => {
   const [queryDraft, setQueryDraft] = useState("");
 
   return (
-    <div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch(queryDraft);
+      }}
+    >
       <div>
         <div className="p-inputgroup flex-1">
           <InputText
@@ -16,10 +21,10 @@ const SearchForm = ({ onSearch }: Props) => {
             value={queryDraft}
             onChange={(e) => setQueryDraft(e.target.value)}
           />
-          <Button onClick={() => onSearch(queryDraft)}>Search</Button>
+          <Button type="submit">Search</Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
