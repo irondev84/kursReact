@@ -33,7 +33,14 @@ const PlaylistsView = (props: Props) => {
 
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
-    // TODO: add to list!
+
+    debugger
+
+    // What will happen? 
+    setPlaylists([...playlists, draft]);
+    setPlaylists([...playlists, draft]);
+    setPlaylists([...playlists, draft]);
+
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();

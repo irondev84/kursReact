@@ -6,6 +6,7 @@ type Props = {
   playlists: { name: string; id: string }[]; // Covariant!
   selectedId?: string;
   onSelect: (id: string) => void;
+  // disabled ????
 };
 
 const PlaylistList = ({ playlists, onSelect, selectedId }: Props) => {
