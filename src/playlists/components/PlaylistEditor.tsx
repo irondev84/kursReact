@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Playlist } from "../containers/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -25,26 +25,41 @@ const PlaylistEditor = ({
   onSave,
 }: Props) => {
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
+  const [isStale, setIsStale] = useState(false);
+
+  useEffect(() => {
+    playlist.id !== playlistDraft.id && setIsStale(true);
+    // setPlaylistDraft(playlist)
+  }, [playlist, playlistDraft]);
 
   const submit = () => {
     onSave(playlistDraft);
   };
 
-  const nameField = useField<HTMLInputElement>((v) =>
-    setPlaylistDraft({ ...playlistDraft, name: v })
-  );
-  const descriptionField = useField<HTMLTextAreaElement>((v) =>
-    setPlaylistDraft({ ...playlistDraft, description: v })
-  );
-
   return (
     <div>
       <pre>{JSON.stringify(playlist, null, 2)}</pre>
       <pre>{JSON.stringify(playlistDraft, null, 2)}</pre>
+
+      {isStale && (
+        <p>
+          Playlist is out of date -{" "}
+          <a href="#" onClick={() => setPlaylistDraft(playlist)}>
+            Refresh?
+          </a>
+        </p>
+      )}
+
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <InputText name="name" {...nameField} />
+          <InputText
+            name="name"
+            value={playlistDraft.name}
+            onChange={(event) =>
+              setPlaylistDraft({ ...playlistDraft, name: event.target.value })
+            }
+          />
           <span>{playlistDraft.name.length} / 100</span>
         </div>
 
@@ -64,7 +79,15 @@ const PlaylistEditor = ({
 
         <div className="flex flex-col">
           <strong>Description</strong>
-          <InputTextarea {...descriptionField}></InputTextarea>
+          <InputTextarea
+            value={playlistDraft.name}
+            onChange={(event) =>
+              setPlaylistDraft({
+                ...playlistDraft,
+                description: event.target.value,
+              })
+            }
+          ></InputTextarea>
         </div>
 
         <div>
