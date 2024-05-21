@@ -8,7 +8,7 @@ import "./index.css";
 // window.React = React;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <React.StrictMode> {/* Verify useEffect is pure by runing 2X */}
     <PrimeReactProvider>
       <App />
     </PrimeReactProvider>

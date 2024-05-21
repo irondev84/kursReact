@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlaylistEditor from "../components/PlaylistEditor";
 import PlaylistDetails from "../components/PlaylistDetails";
 import PlaylistList from "../components/PlaylistList";
@@ -19,30 +19,44 @@ const PlaylistsView = (props: Props) => {
   const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
 
+  const selectPlaylistById = (id: string) => {
+    if (mode !== "details") return;
+
+    setSelectedId(id);
+    // setSelected(playlists.find((p) => p.id == id));
+  };
+
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
     setPlaylists(addItem(draft));
-    setSelectedId(draft.id);
-    setSelected(draft);
     showDetails();
-  };
 
-  const selectPlaylistById = (id: string) => {
-    if (mode !== "details") return;
-    setSelectedId(id);
-    setSelected(playlists.find((p) => p.id == id));
+    setSelectedId(draft.id);
+    // setSelected(draft);
   };
 
   const updatePlaylist = (draft: Playlist) => {
     setPlaylists(replaceItemById(draft));
-    setSelectedId(draft.id);
-    setSelected(draft);
     showDetails();
+
+    setSelectedId(draft.id);
+    // setSelected(draft);
   };
+
+  // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+  // setSelected(playlists.find((p) => p.id == selectedId));
+
+  useEffect(() => {
+    console.log("After DOM Render");
+  });
+
+  console.log("Render VDOM");
 
   return (
     <div>
-      <h1 className="text-2xl leading-loose">Playlists</h1>
+      <h1 className="text-2xl leading-loose" id="test">
+        Playlists
+      </h1>
 
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col gap-5">
