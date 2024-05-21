@@ -33,6 +33,8 @@ const MusicSearchView = (props: Props) => {
       <div className="grid columns-1 gap-5">
         <SearchForm onSearch={search} />
         <div>
+          {message && <p className="color-red-500 p-5">{message}</p>}
+
           <div className="grid grid-cols-4 gap-5">
             {results.map((album) => (
               <Card
