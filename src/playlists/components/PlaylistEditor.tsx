@@ -1,6 +1,9 @@
 import { Button } from "primereact/button";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Playlist } from "../containers/Playlist";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Checkbox } from "primereact/checkbox";
 
 type Props = {
   playlist?: Playlist;
@@ -30,8 +33,12 @@ const PlaylistEditor = ({
     onSave(playlistDraft);
   };
 
-  // TODO: After FIRST Render
-  // document.getElementById('playlistNameRef')?.focus()
+  const playlistNameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // document.getElementById("playlistNameRef")?.focus();
+    playlistNameRef.current?.focus();
+  }, []);
 
   return (
     <div>
@@ -39,9 +46,9 @@ const PlaylistEditor = ({
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <input
+          <InputText
             id="playlistNameRef"
-            type="text"
+            ref={playlistNameRef}
             name="name"
             value={playlistDraft.name}
             onChange={eventHandler}
@@ -50,22 +57,22 @@ const PlaylistEditor = ({
         </div>
 
         <div className="flex">
-          <input
-            type="checkbox"
+          <Checkbox
             checked={playlistDraft.public}
             onChange={(event) =>
               setPlaylistDraft({
                 ...playlistDraft,
-                public: event.target.checked,
+                public: event.target.checked!,
               })
             }
-          />
-          <strong>Public</strong>
+          >
+            Public
+          </Checkbox>
         </div>
 
         <div className="flex flex-col">
           <strong>Description</strong>
-          <textarea
+          <InputTextarea
             value={playlistDraft.description}
             onChange={(event) =>
               setPlaylistDraft({
@@ -73,7 +80,7 @@ const PlaylistEditor = ({
                 description: event.target.value,
               })
             }
-          ></textarea>
+          ></InputTextarea>
         </div>
 
         <div>
