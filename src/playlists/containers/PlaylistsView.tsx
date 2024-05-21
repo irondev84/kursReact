@@ -46,17 +46,21 @@ const PlaylistsView = (props: Props) => {
   // Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
   // setSelected(playlists.find((p) => p.id == selectedId));
 
-  useEffect(
-    () => setSelected(playlists.find((p) => p.id == selectedId)),
-    [selectedId]
-  );
+  // y = 2 * x + b
+  useEffect(() => {
+    setSelected(playlists.find((p) => p.id == selectedId));
+  }, [selectedId, playlists]);
+  /* 
+    React Hook useEffect has a missing dependency: 'playlists'. 
+    Either include it or remove the dependency array. 
+    You can also replace multiple useState variables with useReducer if 'setSelected' needs the current value of 'playlists'.
+    eslintreact-hooks/exhaustive-deps
+  */
 
-  useEffect(() => console.log("After DOM Render"));
-  useEffect(() => console.log("After DOM - if deps changed"), [selectedId]);
-  
-  useEffect(() => console.log("After first Render ONLY"), [/* 'placki',true, 123 */]);
-
-  console.log("Render VDOM");
+  // console.log("Render VDOM");
+  // useEffect(() => console.log("After DOM Render"));
+  // useEffect(() => console.log("After DOM - if deps changed"), [selectedId]);
+  // useEffect(() => console.log("After first Render ONLY"), []);
 
   return (
     <div>
