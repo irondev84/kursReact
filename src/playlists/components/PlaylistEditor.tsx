@@ -1,9 +1,10 @@
 import { Button } from "primereact/button";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useId, useState } from "react";
 import { Playlist } from "../containers/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
+import { useAutoFocus } from "./useAutoFocus";
 
 type Props = {
   playlist?: Playlist;
@@ -25,6 +26,12 @@ const PlaylistEditor = ({
 }: Props) => {
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
+  const playlistNameRef = useAutoFocus();
+  // const playlistNameRef1 = useAutoFocus();
+  // const playlistNameRef2 = useAutoFocus();
+
+  const uid = useId(); // :r1:
+
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPlaylistDraft({ ...playlistDraft, name: event.target.value });
   };
@@ -32,11 +39,6 @@ const PlaylistEditor = ({
   const submit = () => {
     onSave(playlistDraft);
   };
-
-  const playlistNameRef = useRef<HTMLInputElement>(null);
-  useEffect(() => playlistNameRef.current?.focus(), []);
-
-  const uid = useId(); // :r1:
 
   return (
     <div>
