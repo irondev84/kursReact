@@ -12,11 +12,19 @@ const MusicSearchView = (props: Props) => {
   // const [results, setResults] = useState<never[]>([]);
   const [results, setResults] = useState<Album[]>([]);
 
+  const [message, setMessage] = useState("");
+
   const search = (keyword: string) => {
     console.log("Search", keyword);
 
     searchAlbums(keyword).then((res) => {
-      setResults(res);
+      searchAlbums(keyword)
+        .then((data) => {
+          setResults(data);
+        })
+        .catch((error) => {
+          setMessage(error.message);
+        });
     });
   };
 
@@ -36,9 +44,7 @@ const MusicSearchView = (props: Props) => {
                     <Button>Details</Button>
                   </div>
                 )}
-                header={
-                  <img src={album.images[0].url} />
-                }
+                header={<img src={album.images[0].url} />}
                 className="md:w-25rem"
               >
                 {/* children */}

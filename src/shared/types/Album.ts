@@ -13,7 +13,7 @@ export interface AlbumResponse {
     release_date:           string;
     release_date_precision: string;
     restrictions:           Restrictions;
-    type:                   string;
+    type:                   'album';
     uri:                    string;
     artists:                Artist[];
     tracks:                 PagingObject<Track>;
