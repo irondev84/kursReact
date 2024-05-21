@@ -20,7 +20,7 @@ const PlaylistEditor = ({
   onCancel,
   onSave,
 }: Props) => {
-  const [playlistDraft, setPlaylistDraft] = useState(playlist); 
+  const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
   const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPlaylistDraft({ ...playlistDraft, name: event.target.value });
@@ -30,6 +30,9 @@ const PlaylistEditor = ({
     onSave(playlistDraft);
   };
 
+  // TODO: After FIRST Render
+  // document.getElementById('playlistNameRef')?.focus()
+
   return (
     <div>
       <pre>{JSON.stringify(playlistDraft, null, 2)}</pre>
@@ -37,6 +40,7 @@ const PlaylistEditor = ({
         <div className="flex flex-col">
           <strong>Name</strong>
           <input
+            id="playlistNameRef"
             type="text"
             name="name"
             value={playlistDraft.name}
