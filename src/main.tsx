@@ -9,6 +9,8 @@ import {
   redirect,
 } from "react-router-dom";
 import PlaylistsView from "./playlists/containers/PlaylistsView.tsx";
+import MusicSearchView from "./music/containers/MusicSearchView.tsx";
+import AlbumDetailsView from "./music/containers/AlbumDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,17 +36,25 @@ const router = createBrowserRouter([
           },
           {
             path: "search",
-            element: <div>Search music</div>,
+            element: <MusicSearchView />,
           },
           {
             path: "albums/:albumId",
-            element: <div> Album details</div>,
+            element: <AlbumDetailsView />,
           },
         ],
       },
       {
         path: "page-not-found",
         element: <div>404 Page not Found</div>,
+      },
+      {
+        path: "/admin",
+        loader() {
+          /* if(admin) */
+          throw redirect("/login?message=no access");
+          // checkIfAdminHook() -> Throws Redirect inside!
+        },
       },
       {
         path: ":fakePlackiParamToCatchAnything?",
