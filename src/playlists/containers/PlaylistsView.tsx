@@ -11,12 +11,40 @@ type Props = {};
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
 
-  const [playlists, setPlaylists] = useState(mockPlaylists);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [selected, setSelected] = useState<Playlist | undefined>();
 
   const showDetails = () => setMode("details");
   const showEditor = () => setMode("editor");
+
+  /// _____________________
+
+  const [playlists, setPlaylists] = useState(mockPlaylists);
+
+  const createPlaylist = (draft: Playlist) => {
+    draft.id = crypto.randomUUID();
+
+    debugger;
+    setPlaylists((nextPlaylists) => {
+      // 2
+      debugger;
+      return [...nextPlaylists, draft];
+    });
+
+    // 1
+    setPlaylists([...playlists, draft]); // 3 + 1
+    setPlaylists([...playlists, draft]); // 3 + 1
+
+    //            4 + 1
+    //            5 + 1
+    setPlaylists((nextPlaylists) => [...nextPlaylists, draft]);
+
+    setSelectedId(draft.id);
+    setSelected(draft);
+    showDetails();
+  };
+
+  /// _____________________
 
   const selectPlaylistById = (id: string) => {
     if (mode !== "details") return;
@@ -26,21 +54,6 @@ const PlaylistsView = (props: Props) => {
 
   const updatePlaylist = (draft: Playlist) => {
     setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
-    setSelectedId(draft.id);
-    setSelected(draft);
-    showDetails();
-  };
-
-  const createPlaylist = (draft: Playlist) => {
-    draft.id = crypto.randomUUID();
-
-    debugger
-
-    // What will happen? 
-    setPlaylists([...playlists, draft]);
-    setPlaylists([...playlists, draft]);
-    setPlaylists([...playlists, draft]);
-
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
