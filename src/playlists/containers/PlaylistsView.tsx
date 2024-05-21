@@ -23,28 +23,19 @@ const PlaylistsView = (props: Props) => {
     setSelected(playlists.find((p) => p.id == selectedId));
   }, [selectedId, playlists]);
 
-  const selectPlaylistById = (id: string) => {
-    if (mode !== "details") return;
-
-    setSelectedId(id);
-    // setSelected(playlists.find((p) => p.id == id));
-  };
+  const selectPlaylistById = (id: string) => setSelectedId(id);
 
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
     setPlaylists(addItem(draft));
     showDetails();
-
     setSelectedId(draft.id);
-    // setSelected(draft);
   };
 
   const updatePlaylist = (draft: Playlist) => {
     setPlaylists(replaceItemById(draft));
     showDetails();
-
     setSelectedId(draft.id);
-    // setSelected(draft);
   };
 
   return (

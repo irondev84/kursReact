@@ -39,6 +39,7 @@ const PlaylistEditor = ({
 
   return (
     <div>
+      <pre>{JSON.stringify(playlist, null, 2)}</pre>
       <pre>{JSON.stringify(playlistDraft, null, 2)}</pre>
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
