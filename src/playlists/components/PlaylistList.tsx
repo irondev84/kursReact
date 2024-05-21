@@ -4,7 +4,7 @@ import { Playlist } from "../containers/Playlist";
 type Props = {
   // playlists: Playlist[];
   playlists: { name: string; id: string }[]; // Covariant!
-  selectedId: string;
+  selectedId?: string;
   onSelect: (id: string) => void;
 };
 

@@ -1,15 +1,17 @@
 // tsrafce
 
 import { Button } from "primereact/button";
-import React from "react";
 import { Playlist } from "../containers/Playlist";
 
-type Props = {   
-  playlist: Playlist;   
-  onEdit: () => void 
+type Props = {
+  playlist?: Playlist;
+  onEdit: () => void;
 };
 
 const PlaylistDetails = ({ onEdit, playlist }: Props) => {
+  if (playlist == undefined) // Function Guard / Type Guard
+    return <p className="text-blue-600 p-5">No playlist selected</p>;
+
   return (
     <div>
       <div className="flex flex-col gap-5">
