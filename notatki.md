@@ -1,4 +1,4 @@
-# Instalacje 
+ Instalacje 
 node -v 
 v20.10.0
 
@@ -84,3 +84,9 @@ touch src/playlists/components/PlaylistList.tsx
 touch src/playlists/components/PlaylistDetails.tsx
 touch src/playlists/components/PlaylistEditor.tsx
 
+# Hooks
+
+- useState
+- useEffect
+- useRef 
+- useId 
