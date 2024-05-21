@@ -5,8 +5,11 @@ import PlaylistList from "../components/PlaylistList";
 import { mockPlaylists } from "./mockPlaylists";
 import { Playlist } from "./Playlist";
 import { Button } from "primereact/button";
+import { addItem, replaceItemById } from "./addItem";
 
 type Props = {};
+
+// ------
 
 const PlaylistsView = (props: Props) => {
   const [mode, setMode] = useState<"details" | "editor" | "creator">("details");
@@ -24,10 +27,11 @@ const PlaylistsView = (props: Props) => {
   const createPlaylist = (draft: Playlist) => {
     draft.id = crypto.randomUUID();
 
-    // Changes
-    setPlaylists((nextPlaylists) => [...nextPlaylists, draft]);
+    // const effect = addItem(draft);
+    // setPlaylists(effect);
 
-    // Replacements
+    setPlaylists(addItem(draft));
+
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
@@ -42,7 +46,9 @@ const PlaylistsView = (props: Props) => {
   };
 
   const updatePlaylist = (draft: Playlist) => {
-    setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    // setPlaylists(playlists.map((p) => (p.id === draft.id ? draft : p)));
+    setPlaylists(replaceItemById(draft));
+
     setSelectedId(draft.id);
     setSelected(draft);
     showDetails();
