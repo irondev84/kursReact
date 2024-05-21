@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         path: "/admin",
         loader() {
           /* if(admin) */
-          throw redirect("/login?message=no access");
+          throw redirect("/login?message=no access&redirect= after login url");
           // checkIfAdminHook() -> Throws Redirect inside!
         },
       },
