@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { Playlist } from "../containers/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -34,11 +34,9 @@ const PlaylistEditor = ({
   };
 
   const playlistNameRef = useRef<HTMLInputElement>(null);
+  useEffect(() => playlistNameRef.current?.focus(), []);
 
-  useEffect(() => {
-    // document.getElementById("playlistNameRef")?.focus();
-    playlistNameRef.current?.focus();
-  }, []);
+  const uid = useId(); // :r1:
 
   return (
     <div>
@@ -47,7 +45,7 @@ const PlaylistEditor = ({
         <div className="flex flex-col">
           <strong>Name</strong>
           <InputText
-            id="playlistNameRef"
+            id={"playlistNameRef" + uid}
             ref={playlistNameRef}
             name="name"
             value={playlistDraft.name}
