@@ -1,10 +1,10 @@
 import { Button } from "primereact/button";
-import React, { useId, useState } from "react";
+import { useState } from "react";
 import { Playlist } from "../containers/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
-import { useAutoFocus } from "./useAutoFocus";
+import { useField } from "./useField";
 
 type Props = {
   playlist?: Playlist;
@@ -26,19 +26,16 @@ const PlaylistEditor = ({
 }: Props) => {
   const [playlistDraft, setPlaylistDraft] = useState(playlist);
 
-  const playlistNameRef = useAutoFocus();
-  // const playlistNameRef1 = useAutoFocus();
-  // const playlistNameRef2 = useAutoFocus();
-
-  const uid = useId(); // :r1:
-
-  const eventHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setPlaylistDraft({ ...playlistDraft, name: event.target.value });
-  };
-
   const submit = () => {
     onSave(playlistDraft);
   };
+
+  const nameField = useField<HTMLInputElement>((v) =>
+    setPlaylistDraft({ ...playlistDraft, name: v })
+  );
+  const descriptionField = useField<HTMLTextAreaElement>((v) =>
+    setPlaylistDraft({ ...playlistDraft, description: v })
+  );
 
   return (
     <div>
@@ -46,14 +43,7 @@ const PlaylistEditor = ({
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <InputText
-            data-testid="playlistName"
-            id={"playlistNameRef" + uid}
-            ref={playlistNameRef}
-            name="name"
-            value={playlistDraft.name}
-            onChange={eventHandler}
-          />
+          <InputText name="name" {...nameField} />
           <span>{playlistDraft.name.length} / 100</span>
         </div>
 
@@ -73,15 +63,7 @@ const PlaylistEditor = ({
 
         <div className="flex flex-col">
           <strong>Description</strong>
-          <InputTextarea
-            value={playlistDraft.description}
-            onChange={(event) =>
-              setPlaylistDraft({
-                ...playlistDraft,
-                description: event.target.value,
-              })
-            }
-          ></InputTextarea>
+          <InputTextarea {...descriptionField}></InputTextarea>
         </div>
 
         <div>
