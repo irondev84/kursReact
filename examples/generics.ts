@@ -1,5 +1,6 @@
-/* Generics */
+export {}
 
+/* Generics */
 const arr1 = [123, 123, 123];
 const arr2 = ["ala", "ma", "kota"];
 const arr3 = [123, "ma", []];
@@ -29,7 +30,7 @@ const result = domkniecie()
 /* Generic use State Hook */
 const currentTreeNode = { dirty: false, value: '' as any } // Where are we now!?
 
-function useState<T>(initialValue: T) {
+function useStateX<T>(initialValue: T) {
 
     currentTreeNode.value = initialValue
 
