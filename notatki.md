@@ -94,3 +94,15 @@ touch src/playlists/components/PlaylistEditor.tsx
 # React Router
 npm i react-router-dom
 
+
+# Mock Service Worker
+https://github.com/valendres/playwright-msw/blob/main/packages/example/src/mocks/handlers/settings.ts
+
+https://mswjs.io/docs/network-behavior/rest
+
+# PWA Workbox 
+https://developer.chrome.com/docs/workbox/modules/workbox-routing#router_logging
+
+# PWA Update lifecycle
+https://developer.chrome.com/docs/workbox/modules/workbox-window#important_service_worker_lifecycle_moments
+

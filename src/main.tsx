@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div> Hello!</div>,
+        element: <div> Hello! </div>,
       },
       {
         path: "/playlists",
