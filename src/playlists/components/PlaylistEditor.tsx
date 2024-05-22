@@ -1,13 +1,11 @@
 import { Button } from "primereact/button";
-import { useEffect, useState } from "react";
-import { Playlist } from "../../shared/types/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
-import { useField } from "../../shared/hooks/useField";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+// import { Playlist } from "../../shared/types/Playlist";
 
 interface Track {
   id: string;
@@ -27,10 +25,15 @@ const EMPTY_PLAYLIST: Playlist = {
 };
 
 const playlistSchema = z.object({
+  id: z.string(),
   name: z.string({ message: "Name required" }).min(3, "Value too short"),
   public: z.boolean(),
-  desscription: z.string().optional(),
+  description: z.string().optional(),
 });
+
+type Playlist = z.infer<typeof playlistSchema>;
+
+const result = playlistSchema.parse({} as unknown);
 
 const PlaylistEditor = ({
   playlist = EMPTY_PLAYLIST,
