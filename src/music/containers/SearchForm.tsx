@@ -7,14 +7,14 @@ type Props = { onSearch: (keyword: string) => void };
 const SearchForm = ({ onSearch }: Props) => {
   const [queryDraft, setQueryDraft] = useState("");
 
-  const prevHandler = useRef<number>();
-
   useEffect(() => {
-    clearTimeout(prevHandler.current);
+    if (queryDraft === "") return;
 
-    prevHandler.current = setTimeout(() => {
-      console.log(queryDraft);
+    const prevHandler = setTimeout(() => {
+      console.log("search", queryDraft);
     }, 500);
+
+    return () => clearTimeout(prevHandler);
   }, [queryDraft]);
 
   return (
