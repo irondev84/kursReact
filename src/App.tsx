@@ -65,7 +65,8 @@ function App() {
     authorizeUrl: "https://accounts.spotify.com/authorize",
     clientId: "b676b5457a054bdeb5b4b9a7c22c28c1",
     redirectUri: `${document.location.origin}/callback`,
-    scope: "user-read-private user-read-email",
+    scope:
+      "user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public",
     responseType: "token",
     // exchangeCodeForTokenQuery: {
     //   url: "https://your-backend/token",

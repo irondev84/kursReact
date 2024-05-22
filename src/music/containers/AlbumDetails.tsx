@@ -3,26 +3,33 @@ import PageLayout from "../../shared/components/PageLayout";
 import { AlbumCard } from "./AlbumCard";
 import { mockAlbums } from "../../shared/fixtures/mockAlbums";
 import TracksList from "../../playlists/components/TracksList";
-import { useMatch, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLoaderData,
+  useMatch,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useAlbumById } from "./useAlbumSearch";
+import { AlbumResponse } from "../../shared/types/Album";
 
 type Props = {};
 
 const AlbumDetailsView = (props: Props) => {
-  const { albumId = "", trackId = "" } = useParams();
+  // const { albumId = "", trackId = "" } = useParams();
 
-  const { data: album, error, isLoading } = useAlbumById(albumId);
+  // const { data: album, error, isLoading } = useAlbumById(albumId);
 
-  if (error instanceof Error)
-    return <p className="color-red-500 p-5">{error.message}</p>;
+  // if (error instanceof Error)
+  //   return <p className="color-red-500 p-5">{error.message}</p>;
 
-  if (isLoading || !album) return <p>Loading ...</p>;
+  // if (isLoading || !album) return <p>Loading ...</p>;
+
+  const album = useLoaderData() as AlbumResponse;
 
   return (
     <PageLayout title={album.name}>
       <div className="grid grid-cols-2 gap-5">
         <div>
-          {trackId}
           <AlbumCard album={album} />
         </div>
 

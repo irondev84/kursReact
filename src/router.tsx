@@ -5,6 +5,7 @@ import MusicSearchView from "./music/containers/MusicSearchView.tsx";
 import AlbumDetailsView from "./music/containers/AlbumDetails.tsx";
 import { OAuthPopup } from "@tasoskakour/react-use-oauth2";
 import App from "./App.tsx";
+import { getAlbumById } from "./shared/services/musicAPI.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ export const router = createBrowserRouter([
           {
             path: "albums/:albumId/:trackId?",
             element: <AlbumDetailsView />,
+            async loader({ params, request }) {
+              const id = params["albumId"];
+              if (!id) throw redirect("page-not-found");
+              return getAlbumById(id, { signal: request.signal });
+            },
           },
         ],
       },
