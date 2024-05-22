@@ -1,10 +1,10 @@
 import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
-import { Playlist } from "../containers/Playlist";
+import { Playlist } from "../../shared/types/Playlist";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
-import { useField } from "./useField";
+import { useField } from "../../shared/hooks/useField";
 
 type Props = {
   playlist?: Playlist;

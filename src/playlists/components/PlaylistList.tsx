@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Playlist } from "../containers/Playlist";
+import { Playlist } from "../../shared/types/Playlist";
 
 type Props = {
   // playlists: Playlist[];

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PageLayout from "../../shared/components/PageLayout";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { searchAlbums } from "../../shared/musicAPI";
+import { searchAlbums } from "../../shared/services/musicAPI";
 import SearchForm from "./SearchForm";
 import { Album } from "../../shared/types/Album";
 

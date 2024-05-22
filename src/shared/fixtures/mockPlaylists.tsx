@@ -1,4 +1,4 @@
-import { Playlist } from "./Playlist";
+import { Playlist } from "../../shared/types/Playlist";
 
 export const mockPlaylists: Playlist[] = [
   {

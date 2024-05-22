@@ -1,7 +1,7 @@
 // tsrafce
 
 import { Button } from "primereact/button";
-import { Playlist } from "../containers/Playlist";
+import { Playlist } from "../../shared/types/Playlist";
 
 type Props = {
   playlist?: Playlist;
