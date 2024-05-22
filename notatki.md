@@ -106,3 +106,18 @@ https://developer.chrome.com/docs/workbox/modules/workbox-routing#router_logging
 # PWA Update lifecycle
 https://developer.chrome.com/docs/workbox/modules/workbox-window#important_service_worker_lifecycle_moments
 
+## Use Hooks
+https://github.com/streamich/react-use
+
+https://www.reactuse.com/
+
+
+
+# Use Fetch
+https://use-http.com/#/
+
+https://usehooks.com/usefetch
+
+https://swr.vercel.app/
+
+https://tanstack.com/query/latest/docs/framework/react/overview
