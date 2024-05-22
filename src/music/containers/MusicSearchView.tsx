@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageLayout from "../../shared/components/PageLayout";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { searchAlbums } from "../../shared/services/musicAPI";
 import SearchForm from "./SearchForm";
-import { Album } from "../../shared/types/Album";
+import { useAlbumSearch } from "./useAlbumSearch";
 
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
   const [query, setQuery] = useState("");
 
-  const [results = [], setResults] = useState<Album[]>();
-  const [error, setError] = useState<unknown>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setResults(undefined);
-    setIsLoading(true);
-    setError(undefined);
-    searchAlbums(query)
-      .then(setResults)
-      .catch(setError)
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [query]);
+  const { error, isLoading, results } = useAlbumSearch(query);
 
   return (
     <PageLayout title="Music Search">
