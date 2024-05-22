@@ -3,18 +3,20 @@ import PageLayout from "../../shared/components/PageLayout";
 import SearchForm from "./SearchForm";
 import { useAlbumSearch } from "./useAlbumSearch";
 import { AlbumCard } from "./AlbumCard";
+import { useSearchParams } from "react-router-dom";
 
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
-  const [query, setQuery] = useState("");
+  const [params, setQuery] = useSearchParams({ q: "" });
 
+  const query = params.get("q") || "";
   const { data: results = [], error, isLoading } = useAlbumSearch(query);
 
   return (
     <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">
-        <SearchForm onSearch={setQuery} />
+        <SearchForm query={query} onSearch={(q) => setQuery({ q })} />
         <div>
           {error instanceof Error && (
             <p className="color-red-500 p-5">{error.message}</p>
@@ -24,7 +26,7 @@ const MusicSearchView = (props: Props) => {
 
           <div className="grid grid-cols-4 gap-5">
             {results.map((album) => (
-              <AlbumCard album={album} />
+              <AlbumCard album={album} key={album.id} />
             ))}
           </div>
         </div>

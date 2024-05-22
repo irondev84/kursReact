@@ -2,13 +2,18 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { useEffect, useRef, useState } from "react";
 
-type Props = { onSearch: (keyword: string) => void };
+type Props = {
+  query: string;
+  onSearch: (keyword: string) => void;
+};
 
-const SearchForm = ({ onSearch }: Props) => {
-  const [queryDraft, setQueryDraft] = useState("");
+const SearchForm = ({ onSearch, query }: Props) => {
+  const [queryDraft, setQueryDraft] = useState(query);
+
+  useEffect(() => setQueryDraft(query), [query]);
 
   useEffect(() => {
-    if (queryDraft === "") return;
+    if (queryDraft === query) return;
 
     const prevHandler = setTimeout(() => {
       onSearch(queryDraft);
