@@ -2,7 +2,7 @@ import ky from "ky";
 import { AlbumResponse, AlbumSearchResponse } from "../types/Album";
 import { httpClient } from "./httpClient";
 
-export const searchAlbums = async (query: string) => {
+export const searchAlbums = async (query: string, type?: string) => {
   return httpClient
     .get(`search`, {
       searchParams: {

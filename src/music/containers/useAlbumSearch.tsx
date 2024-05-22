@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react"; 
-import { searchAlbums } from "../../shared/services/musicAPI";
+import { useEffect, useState } from "react";
+import { getAlbumById, searchAlbums } from "../../shared/services/musicAPI";
 
-export function useFetch<T, Q>(query: Q,  fetcher: (query: Q) => Promise<T>) {
+export function useFetch<T, Q>(
+  params: Q[],
+  fetcher: (...query: Q[]) => Promise<T>
+) {
   const [results, setResults] = useState<T>();
   const [error, setError] = useState<unknown>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -10,25 +13,28 @@ export function useFetch<T, Q>(query: Q,  fetcher: (query: Q) => Promise<T>) {
     setResults(undefined);
     setIsLoading(true);
     setError(undefined);
-    fetcher(query)
+    fetcher(...params)
       .then(setResults)
       .catch(setError)
       .finally(() => {
         setIsLoading(false);
       });
-  }, [query]);
+  }, [params]);
 
   return {
-    error,
     isLoading,
+    error,
     results,
   };
 }
 
 export function useAlbumSearch(query: string) {
-  return useFetch(query, searchAlbums)
+  return useFetch([query], searchAlbums);
 }
 
+export function useAlbumById(id: string) {
+  return useFetch([id], getAlbumById);
+}
 
 // export function useAlbumSearch(query: string) {
 //   const [results = [], setResults] = useState<Album[]>();
