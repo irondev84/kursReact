@@ -10,7 +10,7 @@ type Props = {};
 const MusicSearchView = (props: Props) => {
   const [query, setQuery] = useState("");
 
-  const { error, isLoading, results } = useAlbumSearch(query);
+  const { results = [], error, isLoading } = useAlbumSearch(query);
 
   return (
     <PageLayout title="Music Search">
