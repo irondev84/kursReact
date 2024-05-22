@@ -21,7 +21,10 @@ export function useFetch<T, Q>(
     setIsLoading(true);
     fetcher(params, { signal: controller.signal })
       .then(setResults)
-      .catch(setError)
+      .catch((error) => {
+        if (error.name == "AbortError") return;
+        setError(error);
+      })
       .finally(() => {
         setIsLoading(false);
       });
