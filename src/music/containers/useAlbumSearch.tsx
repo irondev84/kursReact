@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
 import { getAlbumById, searchAlbums } from "../../shared/services/musicAPI";
+import { Options } from "ky";
 
 export function useFetch<T, Q>(
-  params: Q[],
-  fetcher: (...query: Q[]) => Promise<T>
+  params: Q,
+  fetcher: (query: Q, options?: Options | undefined) => Promise<T>
 ) {
   const [results, setResults] = useState<T>();
   const [error, setError] = useState<unknown>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     setResults(undefined);
-    setIsLoading(true);
     setError(undefined);
-    fetcher(...params)
+
+    if (!params) return;
+
+    setIsLoading(true);
+    fetcher(params, { signal: controller.signal })
       .then(setResults)
       .catch(setError)
       .finally(() => {
         setIsLoading(false);
       });
+
+    return () => controller.abort();
   }, [params]);
 
   return {
@@ -29,11 +37,11 @@ export function useFetch<T, Q>(
 }
 
 export function useAlbumSearch(query: string) {
-  return useFetch([query], searchAlbums);
+  return useFetch(query, searchAlbums);
 }
 
 export function useAlbumById(id: string) {
-  return useFetch([id], getAlbumById);
+  return useFetch(id, getAlbumById);
 }
 
 // export function useAlbumSearch(query: string) {

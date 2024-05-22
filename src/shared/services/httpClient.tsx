@@ -2,6 +2,15 @@ import ky, { HTTPError } from "ky";
 
 export const httpClient = ky.create({
   prefixUrl: "https://api.spotify.com/v1/",
+  retry: {
+    limit: 3,
+    methods: ["get"],
+    statusCodes: [408, 413, 429, 500, 502, 503, 504],
+    // exponential backoff
+    delay(attemptCount) {
+      return 0.3 * 2 ** (attemptCount - 1) * 1000;
+    },
+  },
   hooks: {
     beforeRequest: [
       (req) => {

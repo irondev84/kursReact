@@ -1,10 +1,14 @@
-import ky from "ky";
+import ky, { Options } from "ky";
 import { AlbumResponse, AlbumSearchResponse } from "../types/Album";
 import { httpClient } from "./httpClient";
 
-export const searchAlbums = async (query: string, type?: string) => {
+export const searchAlbums = async (
+  query: string,
+  options?: Options | undefined
+) => {
   return httpClient
     .get(`search`, {
+      ...options,
       searchParams: {
         q: query,
         type: "album",
