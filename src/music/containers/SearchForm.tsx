@@ -1,11 +1,21 @@
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = { onSearch: (keyword: string) => void };
 
 const SearchForm = ({ onSearch }: Props) => {
   const [queryDraft, setQueryDraft] = useState("");
+
+  const prevHandler = useRef<number>();
+
+  useEffect(() => {
+    clearTimeout(prevHandler.current);
+
+    prevHandler.current = setTimeout(() => {
+      console.log(queryDraft);
+    }, 500);
+  }, [queryDraft]);
 
   return (
     <form

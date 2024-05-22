@@ -9,14 +9,10 @@ import { Album } from "../../shared/types/Album";
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
-  // const [results, setResults] = useState<never[]>([]);
   const [results, setResults] = useState<Album[]>([]);
-
   const [message, setMessage] = useState("");
 
   const search = (keyword: string) => {
-    console.log("Search", keyword);
-
     searchAlbums(keyword)
       .then((data) => {
         setResults(data);
