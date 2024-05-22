@@ -3,10 +3,13 @@ import PageLayout from "../../shared/components/PageLayout";
 import { AlbumCard } from "./AlbumCard";
 import { mockAlbums } from "../../shared/fixtures/mockAlbums";
 import TracksList from "../../playlists/components/TracksList";
+import { useMatch, useParams, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
 const AlbumDetailsView = (props: Props) => {
+  const { albumId = "" } = useParams();
+
   return (
     <PageLayout title="Album title">
       <div className="grid grid-cols-2 gap-5">
