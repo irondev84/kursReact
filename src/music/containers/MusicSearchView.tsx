@@ -10,10 +10,10 @@ type Props = {};
 const MusicSearchView = (props: Props) => {
   const [query, setQuery] = useState("");
 
-  const { results = [], error, isLoading } = useAlbumSearch(query);
+  const { data: results = [], error, isLoading } = useAlbumSearch(query);
 
   return (
-    <PageLayout title="Music Search">
+    // <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">
         <SearchForm onSearch={setQuery} />
         <div>
@@ -42,7 +42,7 @@ const MusicSearchView = (props: Props) => {
           </div>
         </div>
       </div>
-    </PageLayout>
+    // </PageLayout>
   );
 };
 

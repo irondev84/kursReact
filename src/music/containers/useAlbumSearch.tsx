@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAlbumById, searchAlbums } from "../../shared/services/musicAPI";
 import { Options } from "ky";
+import { useQuery } from "@tanstack/react-query";
 
 export function useFetch<T, Q>(
   params: Q,
@@ -40,11 +41,21 @@ export function useFetch<T, Q>(
 }
 
 export function useAlbumSearch(query: string) {
-  return useFetch(query, searchAlbums);
+  // return useFetch(query, searchAlbums);
+  return useQuery({
+    queryKey: ["album/search", query],
+    queryFn: ({ signal }) => searchAlbums(query, { signal }),
+    enabled: query !== "",
+  });
 }
 
 export function useAlbumById(id: string) {
-  return useFetch(id, getAlbumById);
+  // return useFetch(id, getAlbumById);
+  return useQuery({
+    queryKey: ["album", id],
+    queryFn: ({ signal }) => getAlbumById(id, { signal }),
+    enabled: id !== "",
+  });
 }
 
 // export function useAlbumSearch(query: string) {

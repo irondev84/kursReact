@@ -18,8 +18,11 @@ export const searchAlbums = async (
     .then((res) => res.albums.items);
 };
 
-export const getAlbumById = async (id: string) => {
+export const getAlbumById = async (
+  id: string,
+  options?: Options | undefined
+) => {
   return ky
-    .get(`https://api.spotify.com/v1/albums/${id}`, {})
+    .get(`https://api.spotify.com/v1/albums/${id}`, options)
     .json<AlbumResponse>();
 };
