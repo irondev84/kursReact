@@ -37,14 +37,19 @@ const UserContextProvider = (props: React.PropsWithChildren<Props>) => {
       user,
       login,
       logout,
+      // getState()
+      // subscribeToStateChangescosmta()
     }),
     [token, user]
   );
 
-  return (
-    <userContext.Provider value={context}>
-      {props.children}
-    </userContext.Provider>
+  return useMemo(
+    () => (
+      <userContext.Provider value={context}>
+        {props.children}
+      </userContext.Provider>
+    ),
+    []
   );
 };
 

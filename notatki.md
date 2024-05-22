@@ -121,3 +121,9 @@ https://usehooks.com/usefetch
 https://swr.vercel.app/
 
 https://tanstack.com/query/latest/docs/framework/react/overview
+
+# State management
+
+https://jotai.org/
+
+https://blog.openreplay.com/top-6-react-state-management-libraries-for-2022/
