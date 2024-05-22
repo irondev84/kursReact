@@ -11,7 +11,7 @@ const SearchForm = ({ onSearch }: Props) => {
     if (queryDraft === "") return;
 
     const prevHandler = setTimeout(() => {
-      console.log("search", queryDraft);
+      onSearch(queryDraft);
     }, 500);
 
     return () => clearTimeout(prevHandler);
