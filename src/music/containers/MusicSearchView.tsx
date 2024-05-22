@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageLayout from "../../shared/components/PageLayout";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
@@ -9,25 +9,33 @@ import { Album } from "../../shared/types/Album";
 type Props = {};
 
 const MusicSearchView = (props: Props) => {
-  const [results, setResults] = useState<Album[]>([]);
-  const [message, setMessage] = useState("");
+  const [query, setQuery] = useState("");
 
-  const search = (keyword: string) => {
-    searchAlbums(keyword)
-      .then((data) => {
-        setResults(data);
-      })
-      .catch((error) => {
-        setMessage(error.message);
+  const [results = [], setResults] = useState<Album[]>();
+  const [error, setError] = useState<unknown>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setResults(undefined);
+    setIsLoading(true);
+    setError(undefined);
+    searchAlbums(query)
+      .then(setResults)
+      .catch(setError)
+      .finally(() => {
+        setIsLoading(false);
       });
-  };
+  }, [query]);
 
   return (
     <PageLayout title="Music Search">
       <div className="grid columns-1 gap-5">
-        <SearchForm onSearch={search} />
+        <SearchForm onSearch={setQuery} />
         <div>
-          {message && <p className="color-red-500 p-5">{message}</p>}
+          {error instanceof Error && (
+            <p className="color-red-500 p-5">{error.message}</p>
+          )}
+          {isLoading && <p>Loading ...</p>}
 
           <div className="grid grid-cols-4 gap-5">
             {results.map((album) => (
