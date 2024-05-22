@@ -27,16 +27,21 @@ const PlaylistsView = (props: Props) => {
     [playlists, selectedId]
   );
 
-  const selectPlaylistById = (id: string) => dispatch(selectPlaylistAction(id));
+  const actions = useMemo(
+    () => ({
+      selectPlaylistById: (id: string) => dispatch(selectPlaylistAction(id)),
 
-  const setMode = (id: "details" | "editor" | "creator") =>
-    dispatch(setModeAction(id));
+      setMode: (id: "details" | "editor" | "creator") =>
+        dispatch(setModeAction(id)),
 
-  const updatePlaylist = (draft: Playlist) =>
-    dispatch(updatePlaylistAction(draft));
+      updatePlaylist: (draft: Playlist) =>
+        dispatch(updatePlaylistAction(draft)),
 
-  const createPlaylist = (draft: Playlist) =>
-    dispatch(createPlaylistAction(draft));
+      createPlaylist: (draft: Playlist) =>
+        dispatch(createPlaylistAction(draft)),
+    }),
+    [dispatch]
+  );
 
   return (
     <>
@@ -46,11 +51,11 @@ const PlaylistsView = (props: Props) => {
             <PlaylistList
               playlists={playlists}
               selectedId={selectedId}
-              onSelect={selectPlaylistById}
+              onSelect={actions.selectPlaylistById}
             />
 
             <div className="flex justify-end">
-              <Button onClick={() => setMode("creator")}>
+              <Button onClick={() => actions.setMode("creator")}>
                 Create new playlist
               </Button>
             </div>
@@ -60,22 +65,22 @@ const PlaylistsView = (props: Props) => {
             {mode === "details" && (
               <PlaylistDetails
                 playlist={selected}
-                onEdit={() => setMode("editor")}
+                onEdit={() => actions.setMode("editor")}
               />
             )}
 
             {mode !== "editor" || (
               <PlaylistEditor
                 playlist={selected}
-                onSave={updatePlaylist}
-                onCancel={() => setMode("details")}
+                onSave={actions.updatePlaylist}
+                onCancel={() => actions.setMode("details")}
               />
             )}
 
             {mode !== "creator" || (
               <PlaylistEditor
-                onSave={createPlaylist}
-                onCancel={() => setMode("details")}
+                onSave={actions.createPlaylist}
+                onCancel={() => actions.setMode("details")}
               />
             )}
 
