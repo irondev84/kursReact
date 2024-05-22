@@ -127,3 +127,13 @@ https://tanstack.com/query/latest/docs/framework/react/overview
 https://jotai.org/
 
 https://blog.openreplay.com/top-6-react-state-management-libraries-for-2022/
+
+
+# Unit testing
+https://testing-library.com/docs/user-event/convenience#click
++ jsdom
+https://vitest.dev/guide/debugging.html#debugging
+https://jestjs.io/
+
+
+
