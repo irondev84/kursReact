@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PageLayout from "../../shared/components/PageLayout";
-import { Button } from "primereact/button";
-import { Card } from "primereact/card";
 import SearchForm from "./SearchForm";
 import { useAlbumSearch } from "./useAlbumSearch";
+import { AlbumCard } from "./AlbumCard";
 
 type Props = {};
 
@@ -24,20 +23,7 @@ const MusicSearchView = (props: Props) => {
 
           <div className="grid grid-cols-4 gap-5">
             {results.map((album) => (
-              <Card
-                key={album.id}
-                title={`${album.name}`}
-                // subTitle="Card subtitle"
-                footer={() => (
-                  <div>
-                    <Button>Details</Button>
-                  </div>
-                )}
-                header={<img src={album.images[0].url} />}
-                className="md:w-25rem"
-              >
-                {/* children */}
-              </Card>
+              <AlbumCard album={album} />
             ))}
           </div>
         </div>

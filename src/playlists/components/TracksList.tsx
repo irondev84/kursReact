@@ -1,32 +1,31 @@
 import React, { useState } from "react";
-import { Playlist } from "../../shared/types/Playlist";
 
 type Props = {
-  // playlists: Playlist[];
+  // tracks: track[];
   tracks: { name: string; id: string }[]; // Covariant!
   selectedId?: string;
-  onSelect: (id: string) => void;
+  onSelect?: (id: string) => void;
   // disabled ????
 };
 
-const PlaylistList = ({ tracks, onSelect, selectedId }: Props) => {
-  const select = (id: string) => onSelect(id);
+const TracksList = ({ tracks, onSelect, selectedId }: Props) => {
+  const select = (id: string) => onSelect?.(id);
 
   return (
     <div>
       <div className="grid grid-cols-1 gap-2  divide-solid divide-y-2 divide-gray-400">
-        {tracks.map((playlist, i) => (
+        {tracks.map((track, i) => (
           <div
-            key={playlist.id}
+            key={track.id}
             className={
               "px-4 border-0 py-5 " +
-              (selectedId === playlist.id
+              (selectedId === track.id
                 ? "bg-blue-500 text-white pb-7 -mb-2"
                 : "hover:bg-gray-100 pb-7 -mb-2 cursor-pointer ")
             }
-            onClick={() => select(playlist.id)}
+            onClick={() => select(track.id)}
           >
-            {i + 1}. {playlist.name}
+            {i + 1}.{track.name}
           </div>
         ))}
       </div>
@@ -34,4 +33,4 @@ const PlaylistList = ({ tracks, onSelect, selectedId }: Props) => {
   );
 };
 
-export default PlaylistList;
+export default TracksList;
