@@ -9,7 +9,7 @@ import { useAlbumById } from "./useAlbumSearch";
 type Props = {};
 
 const AlbumDetailsView = (props: Props) => {
-  const { albumId = "" } = useParams();
+  const { albumId = "", trackId = "" } = useParams();
 
   const { data: album, error, isLoading } = useAlbumById(albumId);
 
@@ -19,9 +19,10 @@ const AlbumDetailsView = (props: Props) => {
   if (isLoading || !album) return <p>Loading ...</p>;
 
   return (
-    <PageLayout title="Album title">
+    <PageLayout title={album.name}>
       <div className="grid grid-cols-2 gap-5">
         <div>
+          {trackId}
           <AlbumCard album={album} />
         </div>
 

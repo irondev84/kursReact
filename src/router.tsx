@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  redirect
-} from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import PlaylistsView from "./playlists/containers/PlaylistsView.tsx";
 import MusicSearchView from "./music/containers/MusicSearchView.tsx";
 import AlbumDetailsView from "./music/containers/AlbumDetails.tsx";
@@ -40,7 +37,7 @@ export const router = createBrowserRouter([
             element: <MusicSearchView />,
           },
           {
-            path: "albums/:albumId",
+            path: "albums/:albumId/:trackId?",
             element: <AlbumDetailsView />,
           },
         ],
