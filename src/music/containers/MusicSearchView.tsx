@@ -4,6 +4,7 @@ import SearchForm from "./SearchForm";
 import { useAlbumSearch } from "./useAlbumSearch";
 import { AlbumCard } from "./AlbumCard";
 import { useSearchParams } from "react-router-dom";
+import { UserMenuItem } from "../../UserMenuItem";
 
 type Props = {};
 
@@ -31,6 +32,8 @@ const MusicSearchView = (props: Props) => {
           </div>
         </div>
       </div>
+
+      <UserMenuItem />
     </PageLayout>
   );
 };

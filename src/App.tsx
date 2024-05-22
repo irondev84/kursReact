@@ -12,6 +12,8 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import { useOAuth2 } from "@tasoskakour/react-use-oauth2";
+import { OAuthToken } from "./shared/context/user.context";
+import { UserMenuItem } from "./UserMenuItem";
 
 const AppLink = forwardRef<
   HTMLAnchorElement,
@@ -30,13 +32,6 @@ const AppLink = forwardRef<
     ref={ref}
   />
 ));
-
-export interface OAuthToken {
-  access_token: string;
-  token_type: string;
-  expires_in: string;
-  state: string;
-}
 
 function App() {
   const user = {
@@ -129,13 +124,7 @@ function App() {
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <MenuButton className="relative flex max-w-xs items-center rounded-full bg-indigo-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
-                            <span className="absolute -inset-1.5" />
-                            <span className="sr-only">Open user menu</span>
-                            <img
-                              className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
-                              alt=""
-                            />
+                            <UserMenuItem></UserMenuItem>
                           </MenuButton>
                         </div>
                         <Transition
@@ -213,21 +202,7 @@ function App() {
                 </div>
                 <div className="border-t border-indigo-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-white">
-                        {user.name}
-                      </div>
-                      <div className="text-sm font-medium text-indigo-300">
-                        {user.email}
-                      </div>
-                    </div>
+                    <UserMenuItem></UserMenuItem>
                     <button
                       type="button"
                       className="relative ml-auto flex-shrink-0 rounded-full bg-indigo-600 p-1 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
