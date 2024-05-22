@@ -19,7 +19,8 @@ export const httpClient = ky.create({
   hooks: {
     beforeRequest: [
       (req) => {
-        req.headers.append("Authorization", `Bearer ${'token'}`);
+        const token = JSON.parse(sessionStorage.getItem("token") || "");
+        req.headers.append("Authorization", `Bearer ${token.access_token}`);
       },
     ],
     beforeError: [

@@ -11,6 +11,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
+import { useOAuth2 } from "@tasoskakour/react-use-oauth2";
 
 const AppLink = forwardRef<
   HTMLAnchorElement,
@@ -29,6 +30,13 @@ const AppLink = forwardRef<
     ref={ref}
   />
 ));
+
+export interface OAuthToken {
+  access_token: string;
+  token_type: string;
+  expires_in: string;
+  state: string;
+}
 
 function App() {
   const user = {
@@ -52,6 +60,26 @@ function App() {
     // { name: "Settings", href: "#" },
     { name: "Login", href: "#" },
   ];
+
+  const { data, loading, error, getAuth, logout } = useOAuth2({
+    authorizeUrl: "https://accounts.spotify.com/authorize",
+    clientId: "b676b5457a054bdeb5b4b9a7c22c28c1",
+    redirectUri: `${document.location.origin}/callback`,
+    scope: "user-read-private user-read-email",
+    responseType: "token",
+    // exchangeCodeForTokenQuery: {
+    //   url: "https://your-backend/token",
+    //   method: "POST",
+    // },
+    extraQueryParameters: {
+      show_dialog: true,
+    },
+    onSuccess: (payload: OAuthToken) => {
+      console.log("Success", payload);
+      sessionStorage.setItem("token", JSON.stringify(payload));
+    },
+    onError: (error_) => console.log("Error", error_),
+  });
 
   return (
     <>
@@ -123,13 +151,14 @@ function App() {
                               <MenuItem key={item.name}>
                                 {({ active }) => (
                                   <a
-                                    href={item.href}
+                                    onClick={getAuth}
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700"
                                     )}
                                   >
-                                    {item.name}
+                                    Login
+                                    {/* {item.name} */}
                                   </a>
                                 )}
                               </MenuItem>

@@ -11,8 +11,13 @@ import {
 import PlaylistsView from "./playlists/containers/PlaylistsView.tsx";
 import MusicSearchView from "./music/containers/MusicSearchView.tsx";
 import AlbumDetailsView from "./music/containers/AlbumDetails.tsx";
+import { OAuthPopup } from "@tasoskakour/react-use-oauth2";
 
 const router = createBrowserRouter([
+  {
+    path: "/callback",
+    element: <OAuthPopup />,
+  },
   {
     path: "/",
     element: <App />,
