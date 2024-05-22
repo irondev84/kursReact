@@ -5,6 +5,11 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
 import { useField } from "../../shared/hooks/useField";
+import { Controller, useForm } from "react-hook-form";
+
+interface Track {
+  id: string;
+}
 
 type Props = {
   playlist?: Playlist;
@@ -24,82 +29,53 @@ const PlaylistEditor = ({
   onCancel,
   onSave,
 }: Props) => {
-  const [playlistDraft, setPlaylistDraft] = useState(playlist);
-  const [isStale, setIsStale] = useState(false);
-
-  useEffect(() => {
-    playlist.id !== playlistDraft.id && setIsStale(true);
-    // setPlaylistDraft(playlist)
-  }, [playlist, playlistDraft]);
+  const { register, control, formState, getValues, watch } = useForm({
+    values: playlist as Playlist // & { tracks: Track[] },
+  });
 
   const submit = () => {
-    onSave(playlistDraft);
+    onSave(getValues());
   };
 
+  // const { name, onBlur, onChange, ref, disabled } = register("name");
+
   return (
-    <div>
-      {/* <pre>{JSON.stringify(playlist, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(playlistDraft, null, 2)}</pre> */}
-
-      {isStale && (
-        <p>
-          Playlist is out of date -
-          <a href="#" onClick={() => setPlaylistDraft(playlist)}>
-            Refresh?
-          </a>
-        </p>
-      )}
-
+    <form onSubmit={submit}>
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <strong>Name</strong>
-          <InputText
-            name="name"
-            value={playlistDraft.name}
-            onChange={(event) =>
-              setPlaylistDraft({ ...playlistDraft, name: event.target.value })
-            }
-          />
-          <span>{playlistDraft.name.length} / 100</span>
+          <InputText {...register("name")} />
+          <span>{watch("name").length} / 100</span>
         </div>
 
         <div className="flex">
-          <Checkbox
-            checked={playlistDraft.public}
-            onChange={(event) =>
-              setPlaylistDraft({
-                ...playlistDraft,
-                public: event.target.checked!,
-              })
-            }
-          >
-            Public
-          </Checkbox>
+          <Controller
+            control={control}
+            name="public"
+            render={({ field }) => (
+              <>
+                <Checkbox {...field} checked={field.value}></Checkbox>
+                Public
+              </>
+            )}
+          />
         </div>
 
         <div className="flex flex-col">
           <strong>Description</strong>
-          <InputTextarea
-            value={playlistDraft.description}
-            onChange={(event) =>
-              setPlaylistDraft({
-                ...playlistDraft,
-                description: event.target.value,
-              })
-            }
-          ></InputTextarea>
+          <InputTextarea {...register("description")}></InputTextarea>
         </div>
 
         <div>
           <Button onClick={onCancel} severity="danger">
             Cancel
           </Button>
-          <Button onClick={submit} severity="success">
+          <Button type="submit" severity="success">
             Save
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

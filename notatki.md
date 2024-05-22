@@ -137,3 +137,6 @@ https://jestjs.io/
 
 
 
+# Forms
+
+npm install @hookform/resolvers react-hook-form zod 
