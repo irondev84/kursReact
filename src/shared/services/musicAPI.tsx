@@ -22,7 +22,7 @@ export const getAlbumById = async (
   id: string,
   options?: Options | undefined
 ) => {
-  return ky
-    .get(`https://api.spotify.com/v1/albums/${id}`, options)
+  return httpClient
+    .get(`albums/${id}`, options)
     .json<AlbumResponse>();
 };

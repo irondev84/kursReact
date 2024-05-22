@@ -4,36 +4,39 @@ import { AlbumCard } from "./AlbumCard";
 import { mockAlbums } from "../../shared/fixtures/mockAlbums";
 import TracksList from "../../playlists/components/TracksList";
 import { useMatch, useParams, useSearchParams } from "react-router-dom";
+import { useAlbumById } from "./useAlbumSearch";
 
 type Props = {};
 
 const AlbumDetailsView = (props: Props) => {
   const { albumId = "" } = useParams();
 
+  const { data: album, error, isLoading } = useAlbumById(albumId);
+
+  if (error instanceof Error)
+    return <p className="color-red-500 p-5">{error.message}</p>;
+
+  if (isLoading || !album) return <p>Loading ...</p>;
+
   return (
     <PageLayout title="Album title">
       <div className="grid grid-cols-2 gap-5">
         <div>
-          <AlbumCard album={mockAlbums[0]} />
+          <AlbumCard album={album} />
         </div>
 
         <div>
           <div className="grid grid-cols-1  gap-5">
             <strong>Artist</strong>
-            <div>Artistname</div>
+            <div>{album.artists[0].name}</div>
 
             <strong>Release date</strong>
-            <div>123123</div>
+            <div>{album.release_date}</div>
 
             <strong>Tracks</strong>
 
             <div>
-              <TracksList
-                tracks={[
-                  { id: "123", name: "123" },
-                  { id: "123", name: "123" },
-                ]}
-              />
+              <TracksList tracks={album.tracks.items} />
             </div>
           </div>
         </div>

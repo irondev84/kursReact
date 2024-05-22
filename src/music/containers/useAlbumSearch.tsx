@@ -81,3 +81,6 @@ export function useAlbumById(id: string) {
 //     results,
 //   };
 // }
+
+
+// if( wolnaOperacja1() && wolnaoperacja2() && ciekzaoperacja3())

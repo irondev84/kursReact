@@ -20,6 +20,7 @@ const MusicSearchView = (props: Props) => {
             <p className="color-red-500 p-5">{error.message}</p>
           )}
           {isLoading && <p>Loading ...</p>}
+          {/* {isLoading ? <p>Loading ...</p> : false} */}
 
           <div className="grid grid-cols-4 gap-5">
             {results.map((album) => (
